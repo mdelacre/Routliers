@@ -25,22 +25,22 @@ outliers_bivar=function(data,
                         na.rm = TRUE,
                         plot=TRUE,
                         verbose = TRUE){
-  
+
   if (na.rm==TRUE) {
     dat=na.omit(data)
   } else {dat=data}
-  
+
   for (i in 1:ncol(dat)){
     if(class(dat[,i])!="numeric") stop("Data are not numeric")
   }
-  
-  
+
+
   #Creating covariance matrix for Minimum Covariance Determinant
   output<-cov.mcd(dat,cor=FALSE,quantile.used=nrow(dat)*h) # by default, use the "best" method = exhaustive method
-  
-  cutoff<-(qchisq(p=1-alpha, df=ncol(dat))) # how to compute df? Read the text and add it (2 si 2 variables, c dc tj égal à k? à checker)
+
+  cutoff<-(qchisq(p=1-alpha, df=ncol(dat))) # how to compute df? Read the text and add it (2 si 2 variables, c dc tj ?gal ? k? ? checker)
   # cor = FALSE to avoid useless output(correlation matrix)
-  
+
   if (method=="MMCD"){
     #Distances from centroid for each matrix
     dist<-mahalanobis(dat,output$center,output$cov) # distance
@@ -58,9 +58,9 @@ outliers_bivar=function(data,
     outliers<-cbind(x_axis=coordinates$x_axis,y_axis=coordinates$y_axis)
     if (length(names_outliers)!=0){rownames(outliers)=paste("POS",names_outliers)}
   }
-  
+
   # plotting results
-  
+
   if (plot==TRUE){
     par(xpd=FALSE)
     plot(dat[,1],dat[,2],xlab="X",ylab="Y",pch=19,cex=.5)
@@ -84,13 +84,13 @@ outliers_bivar=function(data,
       text(dat[names_outliers,][,1],dat[names_outliers,][,2], as.character(names_outliers),pos=4,cex=.75,col="red")
       legend(x="top",xjust="centered",inset=c(0,-.2),legend = c("Regression line including all data","Regression line without detected outliers"),fill = c("darkviolet","darkgreen"),box.lty=0)}}
 
-  
+
   # print results
   if(method=="MMCD"){
     meth="Minimum Covariance Determinant estimator"
   } else if (method =="Mahalanobis"){
     meth="Mahalanobis distance"}
-  
+
   if(verbose == TRUE){
     cat("Method:",meth)
     cat("\n\n")
@@ -100,12 +100,12 @@ outliers_bivar=function(data,
     cat("Number of outliers:", length(names_outliers))
     cat("\n")
     cat("Outliers positions:", paste0(round(names_outliers, digits = 4)))
-    
-    # Return results in list() 
+
+    # Return results in list()
     invisible(list(MaxDist = cutoff, nbrow=names_outliers))
-    
+
   }
 
 }
-   
+
 
