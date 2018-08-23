@@ -13,7 +13,9 @@ Imports:
 BugReports:https://github.com/mdelacre/Routliers/issues
 License: MIT
 YEAR: 2018
-COPYRIGHT HOLDER: Marie Delacre
+COPYRIGHT HOLDER: 
+   Marie Delacre,
+   Olivier Klein
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0.9000
