@@ -10,7 +10,7 @@
 #' @return Returns median, MAD, lower MAD limit, upper MAD limit, extremely small values, extremely high values
 #' @examples
 #' Run outliers_MAD
-#' outliers_MAD(data=c(3,3,10,10,8,1,6,50), constant=1.4826,threshold=3,na.rm=TRUE,
+#' outliers_MAD(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit qchisq
 #' @importFrom graphics abline legend par points rect segments text title
