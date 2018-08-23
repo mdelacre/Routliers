@@ -1,0 +1,20 @@
+
+Package: Routliers
+Date: 22-08-2018
+Title: Robust way of detecting outliers
+Version: 0.0.0.9000
+Authors@R: person("Marie","Delacre",email="marie.delacre@ulb.ac.be",role=c("aut","cre"))
+Description: Detecting outliers using robust methods:the MAD for univariate outliers; MMCD for multivariate outliers
+Depends: R (>= 3.4.2)
+Imports:
+    MASS,
+    stats,
+    graphics
+BugReports:https://github.com/mdelacre/Routliers/issues
+License: MIT
+YEAR: 2018
+COPYRIGHT HOLDER: Marie Delacre
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0.9000
+
