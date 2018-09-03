@@ -20,7 +20,7 @@
 
 outliers_bivar=function(data,
                         method="MMCD",
-                        h=.5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
+                        h=.75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
                         alpha=.01,
                         na.rm = TRUE,
                         plot=TRUE,
