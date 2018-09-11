@@ -1,7 +1,6 @@
-#' MMCD function to detect outliers
-#' @export outliers_MCD
+#' mahalanobis function to detect outliers
+#' @export outliers_mahalanobis
 #' @param data matrix of bivariate values from which we want to compute outliers
-#' @param method method of outliers detection (MMCD or Mahalanobis distance)
 #' @param h when using the MMCD method, proportion of dataset to used in order to compute sample means and covariances
 #' @param alpha alpha value (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE
