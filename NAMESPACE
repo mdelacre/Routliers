@@ -2,6 +2,7 @@
 
 export(outliers_MAD)
 export(outliers_MCD)
+export(outliers_mahalanobis)
 importFrom(MASS,cov.mcd)
 importFrom(graphics,abline)
 importFrom(graphics,legend)
