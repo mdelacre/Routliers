@@ -29,7 +29,7 @@ outliers_MCD=function(data,
   } else {dat=data}
 
   for (i in 1:ncol(dat)){
-    if(class(dat[,i])!="numeric") stop("Data are not numeric")
+    if(inherits(dat[,i],c("numeric","integer"))==FALSE) stop("Data are neither numeric nor integer")
   }
 
   #Creating covariance matrix for Minimum Covariance Determinant

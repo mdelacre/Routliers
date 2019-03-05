@@ -22,7 +22,7 @@ outliers_MAD=function(data,
                       plot=TRUE,
                       verbose = TRUE){
 
-  if(class(data)!="numeric") stop("Data are not numeric")
+  if(inherits(data,c("numeric","integer"))==FALSE) stop("Data are neither numeric nor integer")
 
   if (na.rm==TRUE) {
     dat=na.omit(data)
