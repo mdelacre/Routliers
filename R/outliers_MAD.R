@@ -1,5 +1,5 @@
 #' MAD function to detect outliers
-#' @export outliers_MAD
+#' @export outliers_mad
 #' @param data vector of numeric values from which we want to compute outliers
 #' @param constant scale factor
 #' @param threshold the number of MAD considered as a threshold to consider a value an outlier
@@ -9,13 +9,13 @@
 #' @keywords MAD outliers
 #' @return Returns median, MAD, lower MAD limit, upper MAD limit, extremely small values, extremely high values
 #' @examples
-#' Run outliers_MAD
-#' outliers_MAD(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
+#' Run outliers_mad
+#' outliers_mad(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit qchisq
 #' @importFrom graphics abline legend par points rect segments text title
 
-outliers_MAD=function(data,
+outliers_mad=function(data,
                       constant = 1.4826,
                       threshold=3,
                       na.rm = TRUE,
@@ -84,6 +84,6 @@ outliers_MAD=function(data,
 # It is possible to use other center than the median. Should I include it? (for I don't know trimmed median or similar)
 
 data=c(2,3,4,9,60,40)
-outliers_MAD(data)
+outliers_mad(data)
 
 

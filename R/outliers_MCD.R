@@ -1,5 +1,5 @@
 #' MCD function to detect outliers
-#' @export outliers_MCD
+#' @export outliers_mcd
 #' @param data matrix of bivariate values from which we want to compute outliers
 #' @param h when using the MMCD method, proportion of dataset to used in order to compute sample means and covariances
 #' @param alpha alpha value (by default .01)
@@ -12,12 +12,12 @@
 #' ## Run outliers_bivar
 #' Sigma=matrix(c(1,.5,.5,1),2,2)
 #' data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
-#' outliers_MCD(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
+#' outliers_mcd(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
 #' @importFrom stats mahalanobis cov lm median na.omit qchisq
 #' @importFrom MASS cov.mcd
 #' @importFrom graphics abline legend par points rect segments text title
 
-outliers_MCD=function(data,
+outliers_mcd=function(data,
                       h=.5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
                       alpha=.01,
                       na.rm = TRUE,
