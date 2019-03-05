@@ -9,7 +9,7 @@
 #' @keywords mahalanobis MMCD outliers
 #' @return Returns Method, Max distance, number of outliers, Outliers positions
 #' @examples
-#' ## Run outliers_bivar
+#' ## Run outliers_mcd
 #' Sigma=matrix(c(1,.5,.5,1),2,2)
 #' data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
 #' outliers_mcd(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
