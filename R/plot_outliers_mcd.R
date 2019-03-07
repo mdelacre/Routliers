@@ -7,7 +7,7 @@
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
 #' @keywords plot MMCD outliers
 #' @examples
-#' ## Run outliers_mcd
+#' ## Run plot_outliers_mcd
 #' Sigma=matrix(c(1,.5,.5,1),2,2)
 #' data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
 #' plot_outliers_mcd(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)

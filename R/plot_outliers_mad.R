@@ -7,7 +7,7 @@
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
 #' @keywords plot MAD outliers
 #' @examples
-#' Run outliers_mad
+#' Run plot_outliers_mad
 #' plot_outliers_mad(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit

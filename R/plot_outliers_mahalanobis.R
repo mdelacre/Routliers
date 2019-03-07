@@ -8,7 +8,7 @@
 #' @keywords plot mahalanobis outliers
 #' @return Returns Method, Max distance, number of outliers, Outliers positions
 #' @examples
-#' ## Run outliers_mahalanobis
+#' ## Run plot_outliers_mahalanobis
 #' Sigma=matrix(c(1,.5,.5,1),2,2)
 #' data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
 #' plot_outliers_mahalanobis(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
