@@ -11,7 +11,7 @@
 #' plot_outliers_mad(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit
-#' @importFrom graphics legend par points rect segments text title
+#' @importFrom graphics par points rect segments text title
 
 plot_outliers_mad=function(data,
                       constant = 1.4826,
