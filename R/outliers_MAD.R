@@ -1,20 +1,28 @@
 #' MAD function to detect outliers
-#' @export outliers_mad
-#' @param data vector of numeric values from which we want to compute outliers
-#' @param constant scale factor
+#'
+#' Detecting univariate outliers using the robust median absolute deviation
+#'
+#' @param data vector of values from which we want to compute outliers
+#' @param b constant depending on the assumed distribution underlying the data, that equals 1/Q(0.75).  When the normal distribution is assumed, the constant 1.4826 is used (and it makes the MAD and SD of normal distributions comparable).
 #' @param threshold the number of MAD considered as a threshold to consider a value an outlier
 #' @param na.rm set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
+#'
+#' @export outliers_mad
 #' @keywords MAD outliers
+#'
 #' @return Returns median, MAD, lower MAD limit, upper MAD limit, extremely small values, extremely high values
 #' @examples
 #' Run outliers_mad
-#' outliers_mad(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
+#' data=
+#'
+#' ability.cov
+#' outliers_mad(data=rnorm(150), b=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit
 
 outliers_mad=function(data,
-                      constant = 1.4826,
+                      b = 1.4826,
                       threshold=3,
                       na.rm = TRUE,
                       verbose = TRUE){
@@ -27,7 +35,7 @@ outliers_mad=function(data,
 
   # Calculate the MAD
   center=median(dat)
-  MAD=constant*median(abs(dat-center))
+  MAD=b*median(abs(dat-center))
   half_CI=threshold*MAD
 
   # Calculate the range of acceptable values
@@ -60,3 +68,4 @@ outliers_mad=function(data,
   invisible(list(Median = center, MAD = MAD, LL_CI_MAD = LL_CI_MAD,UL_CI_MAD = UL_CI_MAD,L_outliers=dat[dat<LL_CI_MAD],U_outliers=dat[dat>UL_CI_MAD],outliers=c(dat[dat<LL_CI_MAD],dat[dat>UL_CI_MAD])))
 
 }
+

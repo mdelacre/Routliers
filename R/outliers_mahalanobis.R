@@ -1,10 +1,15 @@
 #' mahalanobis function to detect outliers
-#' @export outliers_mahalanobis
+#'
+#' Detecting multivariate outliers using the Mahalanobis distance
+#'
 #' @param data matrix of bivariate values from which we want to compute outliers
 #' @param h when using the MMCD method, proportion of dataset to used in order to compute sample means and covariances
 #' @param alpha alpha value (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
+#'
+#' @export outliers_mahalanobis
+#'
 #' @keywords mahalanobis outliers
 #' @return Returns Method, Max distance, number of outliers, Outliers positions
 #' @examples

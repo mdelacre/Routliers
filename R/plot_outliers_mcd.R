@@ -1,11 +1,16 @@
-#' MCD function to detect outliers
-#' @export plot_outliers_mcd
+#' Plotting function for the MCD
+#'
+#' plotting data and highlighting multivariate outliers detected with the MCD function
+#'
 #' @param data matrix of bivariate values from which we want to compute outliers
 #' @param h when using the MMCD method, proportion of dataset to used in order to compute sample means and covariances
 #' @param alpha alpha value (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
-#' @keywords plot MMCD outliers
+#'
+#' @export plot_outliers_mcd
+#' @keywords plot MMCD outliers#'
+#' @return None
 #' @examples
 #' ## Run plot_outliers_mcd
 #' Sigma=matrix(c(1,.5,.5,1),2,2)

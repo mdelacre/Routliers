@@ -1,20 +1,25 @@
-#' MAD function to detect outliers
-#' @export plot_outliers_mad
+#' Plotting function for the mad
+#'
+#' plotting data and highlighting univariate outliers detected with the MAD function
+#'
 #' @param data vector of numeric values from which we want to compute outliers
-#' @param constant scale factor
+#' @param b constant depending on the assumed distribution underlying the data, that equals 1/Q(0.75).  When the normal distribution is assumed, the constant 1.4826 is used (and it makes the MAD and SD of normal distributions comparable).
 #' @param threshold the number of MAD considered as a threshold to consider a value an outlier
 #' @param na.rm set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE
 #' @param verbose logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE
+#'
+#' @export plot_outliers_mad
 #' @keywords plot MAD outliers
+#' @return None
 #' @examples
 #' Run plot_outliers_mad
-#' plot_outliers_mad(data=rnorm(150), constant=1.4826,threshold=3,na.rm=TRUE,
+#' plot_outliers_mad(data=rnorm(150), b=1.4826,threshold=3,na.rm=TRUE,
 #' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit
 #' @importFrom graphics par points rect segments text title
 
 plot_outliers_mad=function(data,
-                      constant = 1.4826,
+                      b = 1.4826,
                       threshold=3,
                       na.rm = TRUE,
                       verbose = TRUE){
@@ -27,7 +32,7 @@ plot_outliers_mad=function(data,
 
   # Calculate the MAD
   center=median(dat)
-  MAD=constant*median(abs(dat-center))
+  MAD=b*median(abs(dat-center))
   half_CI=threshold*MAD
 
   # Calculate the range of acceptable values
