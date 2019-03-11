@@ -14,11 +14,8 @@
 #' @return Returns median, MAD, lower MAD limit, upper MAD limit, extremely small values, extremely high values
 #' @examples
 #' Run outliers_mad
-#' data=
+#' outliers_mad(data=rnorm(150), b=1.4826,threshold=3,na.rm=TRUE,verbose=TRUE)
 #'
-#' ability.cov
-#' outliers_mad(data=rnorm(150), b=1.4826,threshold=3,na.rm=TRUE,
-#' plot=TRUE, verbose=TRUE)
 #' @importFrom stats na.omit
 
 outliers_mad=function(data,

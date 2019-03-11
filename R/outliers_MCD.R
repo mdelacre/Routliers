@@ -15,7 +15,7 @@
 #' ## Run outliers_mcd
 #' Sigma=matrix(c(1,.5,.5,1),2,2)
 #' data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
-#' outliers_mcd(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
+#' outliers_mcd(data=data, h=.5,na.rm=TRUE,verbose=TRUE)
 #' @importFrom stats mahalanobis na.omit qchisq
 #' @importFrom MASS cov.mcd
 
