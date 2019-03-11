@@ -20,7 +20,7 @@
 #' @importFrom stats na.omit
 #' @importFrom graphics par points rect segments text title
 
-plot_outliers_mad=function(data=c(4,4,4,4),
+plot_outliers_mad=function(data,
                       b = 1.4826,
                       threshold=3,
                       na.rm = TRUE,
