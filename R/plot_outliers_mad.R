@@ -15,11 +15,12 @@
 #' Run plot_outliers_mad
 #' plot_outliers_mad(data=runif(150,-100,100), b=1.4826,threshold=3,na.rm=TRUE,verbose=TRUE)
 #' plot_outliers_mad(data=Intentions$age)
+#' plot_outliers_mad(data=Intentions$Total_Amount_Earned)
 #'
 #' @importFrom stats na.omit
 #' @importFrom graphics par points rect segments text title
 
-plot_outliers_mad=function(data=Intentions$age,
+plot_outliers_mad=function(data=c(4,4,4,4),
                       b = 1.4826,
                       threshold=3,
                       na.rm = TRUE,
@@ -49,16 +50,27 @@ plot_outliers_mad=function(data=Intentions$age,
     par(mar=c(5.1,3.1,5.1,1.1))
     plot(NA,xlim=c(min(min(dat),LL_CI_MAD)-.1*(max(dat)-min(dat)),max(max(dat),UL_CI_MAD)+.1*(max(dat)-min(dat))),ylim=c(0,1), bty="n",yaxt="n", ylab="",xlab="")
     rect(LL_CI_MAD,.25,UL_CI_MAD,.45,col = "lightgrey", border = "lightgrey", lwd = par("lwd"))
+
+    if(LL_CI_MAD!=UL_CI_MAD){
     segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd=1)
-    text(LL_CI_MAD,.45,"lower MAD limit",lwd=1,pos=3,cex=.75)
+    text(LL_CI_MAD,.45,"lower CI limit",lwd=1,pos=3,cex=.75)
     segments(UL_CI_MAD,0.25,UL_CI_MAD,0.45, lwd=1)
-    text(UL_CI_MAD,.45,"upper MAD limit",lwd=1,pos=3,cex=.75)
+    text(UL_CI_MAD,.45,"upper CI limit",lwd=1,pos=3,cex=.75)
     segments(center,0.25,center,0.45, lwd=3,col="red")
     text(center,.45,"median",lwd=1,pos=3,cex=.75,col="red")
+    } else if (LL_CI_MAD==UL_CI_MAD){
+      segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd=1)
+      text(LL_CI_MAD,.45,paste0("lower = upper","\n","CI limit"),lwd=1,pos=3,cex=.75)
+    }
     if (length(outliers)!=0){
         points(dat[outliers_pos],rep(.35,length(outliers_pos)),col="red",bg="red",pch=19,cex=.5)}
 
-        title(main=paste("Detecting outliers \n Threshold=",threshold,"MAD around the median"))
+        title(main=paste("Detecting values out of the Confidence Interval \n CI = Median","\u00B1",threshold," MAD"))
 
+        if(length(dat[outliers_pos])==0){comment="No outliers are detected"
+        } else {comment=paste(length(outliers),"outliers are detected")}
+
+        legend("top",comment,pch=1,col="white",cex=1,bty="n")
 }
+
 
