@@ -16,6 +16,9 @@
 #' plot_outliers_mad(data=runif(150,-100,100), b=1.4826,threshold=3,na.rm=TRUE,verbose=TRUE)
 #' plot_outliers_mad(data=Intentions$age)
 #' plot_outliers_mad(data=Intentions$Total_Amount_Earned)
+#' ls(Attacks)
+#' SOC=rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' plot_outliers_mad(data=SOC)
 #'
 #' @importFrom stats na.omit
 #' @importFrom graphics par points rect segments text title
