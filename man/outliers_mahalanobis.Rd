@@ -22,13 +22,14 @@ outliers_mahalanobis(data, h = 0.5, alpha = 0.01, na.rm = TRUE,
 Returns Method, Max distance, number of outliers, Outliers positions
 }
 \description{
-mahalanobis function to detect outliers
+Detecting multivariate outliers using the Mahalanobis distance
 }
 \examples{
 ## Run outliers_mahalanobis
-Sigma=matrix(c(1,.5,.5,1),2,2)
-data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
-outliers_mahalanobis(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
+SOC=rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+outliers_mad(data=SOC)
+HSC=rowMeans(Attacks[,22:46])
+outliers_mahalanobis(data=cbind(SOC,HSC), h=.5,na.rm=TRUE,verbose=TRUE)
 }
 \keyword{mahalanobis}
 \keyword{outliers}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_outliers_mcd.R
 \name{plot_outliers_mcd}
 \alias{plot_outliers_mcd}
-\title{MCD function to detect outliers}
+\title{Plotting function for the MCD}
 \usage{
 plot_outliers_mcd(data, h = 0.5, alpha = 0.01, na.rm = TRUE,
   verbose = TRUE)
@@ -18,15 +18,19 @@ plot_outliers_mcd(data, h = 0.5, alpha = 0.01, na.rm = TRUE,
 
 \item{verbose}{logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE}
 }
+\value{
+None
+}
 \description{
-MCD function to detect outliers
+plotting data and highlighting multivariate outliers detected with the MCD function
 }
 \examples{
 ## Run plot_outliers_mcd
-Sigma=matrix(c(1,.5,.5,1),2,2)
-data=mvrnorm(100,mu=rep(0,2),Sigma=Sigma)
-plot_outliers_mcd(data=data, h=.5,na.rm=TRUE,plot=TRUE, verbose=TRUE)
+SOC=rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+outliers_mad(data=SOC)
+HSC=rowMeans(Attacks[,22:46])
+plot_outliers_mcd(data=cbind(SOC,HSC), h=.5,na.rm=TRUE,verbose=TRUE)
 }
 \keyword{MMCD}
-\keyword{outliers}
+\keyword{outliers#'}
 \keyword{plot}
