@@ -16,27 +16,27 @@
 #'
 #' @format A data frame with 2077 rows and 46 variables:
 #' \describe{
-#'   \item{i..age}{age of participants, in years}
+#'   \item{age}{age of participants, in years}
 #'   \item{genre}{gender}
 #'   \item{presencebxl}{participants were they in Brussels during the Attacks? -1 if no, 1 if yes}
-#'   \item{soc1}{1.Vous avez le sentiment que vous ne vous souciez pas reellement de ce qui se passe autour de vous: 1 = Tres rarement ou rarement; 7 = Souvent}
+#'   \item{soc1}{Vous avez le sentiment que vous ne vous souciez pas reellement de ce qui se passe autour de vous: 1 = Tres rarement ou rarement; 7 = Souvent}
 #'   \item{soc1r}{item1 reversed}
-#'   \item{soc2}{2.Vous est-il arrive dans le passe d etre surpris(e) par le comportement de gens que vous pensiez connaitre tres bien ?: 1 = Jamais; 7 = Toujours}
+#'   \item{soc2}{Vous est-il arrive dans le passe d etre surpris(e) par le comportement de gens que vous pensiez connaitre tres bien ?: 1 = Jamais; 7 = Toujours}
 #'   \item{soc2r}{item2 reversed}
-#'   \item{soc3}{3.Est-il arrive que des gens sur lesquels vous comptiez vous decoivent ?: 1= Jamais; 7 = Toujours}
+#'   \item{soc3}{Est-il arrive que des gens sur lesquels vous comptiez vous decoivent ?: 1= Jamais; 7 = Toujours}
 #'   \item{soc3r}{sense of coherence, item3 reversed}
-#'   \item{soc4}{4.Jusqu a maintenant, votre vie : 1 = N a eu aucun but ni objectif clair; 7 = A eu des buts et des objectifs tres clairs}
-#'   \item{soc5}{5.Avez-vous le sentiment que vous etes traite(e) injustement ?:1 = Tres souvent; 7 = Tres rarement ou jamais}
-#'   \item{soc6}{6.6.	Avez-vous le sentiment que vous etes dans une situation inconnue et que vous ne savez pas quoi faire ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
-#'   \item{soc7}{7.Faire les choses que vous faites quotidiennement est : 1 = Une source de plaisir et de satisfaction; 7 = Une source de souffrance profonde et d ennui}
+#'   \item{soc4}{Jusqu a maintenant, votre vie : 1 = N a eu aucun but ni objectif clair; 7 = A eu des buts et des objectifs tres clairs}
+#'   \item{soc5}{Avez-vous le sentiment que vous etes traite(e) injustement ?:1 = Tres souvent; 7 = Tres rarement ou jamais}
+#'   \item{soc6}{Avez-vous le sentiment que vous etes dans une situation inconnue et que vous ne savez pas quoi faire ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
+#'   \item{soc7}{Faire les choses que vous faites quotidiennement est : 1 = Une source de plaisir et de satisfaction; 7 = Une source de souffrance profonde et d ennui}
 #'   \item{soc7r}{item7 reversed}
-#'   \item{soc8}{8.Avez-vous des idees ou des sentiments confus(es) ?: 1 = Tres souvent; 7 =  Tres rarement ou jamais}
-#'   \item{soc9}{9.Vous arrive-t-il d avoir des sentiments intimes que vous prefereriez ne pas avoir ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
-#'   \item{soc10}{10.	Beaucoup de gens (meme s’ils ont beaucoup de caractere) se sentent parfois de pauvres cloches.  Avez-vous deja eu ce sentiment dans le passe ?: 1 = Jamais; 7 = Tres souvent}
+#'   \item{soc8}{Avez-vous des idees ou des sentiments confus(es) ?: 1 = Tres souvent; 7 =  Tres rarement ou jamais}
+#'   \item{soc9}{Vous arrive-t-il d avoir des sentiments intimes que vous prefereriez ne pas avoir ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
+#'   \item{soc10}{Beaucoup de gens (meme s’ils ont beaucoup de caractere) se sentent parfois de pauvres cloches.  Avez-vous deja eu ce sentiment dans le passe ?: 1 = Jamais; 7 = Tres souvent}
 #'   \item{soc10r}{item10 reversed}
-#'   \item{soc11}{11.	Quand quelque chose arrive, vous trouvez generalement que : 1 = Vous surestimez ou sous-estimez son importance; 7 = Vous voyez les choses dans de justes proportions}
-#'   \item{soc12}{12.	Avez-vous le sentiment que les choses que vous faites dans la vie quotidienne  ont peu de sens ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
-#'   \item{soc13}{13.	Vous avez le sentiment que vous n etes pas sur(e) de vous maitriser : 1 = Tres souvent; 7 = Tres rarement ou jamais}
+#'   \item{soc11}{Quand quelque chose arrive, vous trouvez generalement que : 1 = Vous surestimez ou sous-estimez son importance; 7 = Vous voyez les choses dans de justes proportions}
+#'   \item{soc12}{Avez-vous le sentiment que les choses que vous faites dans la vie quotidienne  ont peu de sens ?: 1 = Tres souvent; 7 = Tres rarement ou jamais}
+#'   \item{soc13}{Vous avez le sentiment que vous n etes pas sur(e) de vous maitriser : 1 = Tres souvent; 7 = Tres rarement ou jamais}
 #'   \item{hsc1}{Mal de tete}
 #'   \item{hsc2}{Tremblement}
 #'   \item{hsc3}{Fatigue ou etourdissement}
