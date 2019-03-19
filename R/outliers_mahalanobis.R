@@ -16,6 +16,7 @@
 #' HSC <- rowMeans(Attacks[,22:46])
 #' res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
 #'
+#'
 #' @importFrom stats mahalanobis cov na.omit qchisq
 
 outliers_mahalanobisEst <- function(x,
