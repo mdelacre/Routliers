@@ -13,7 +13,6 @@
 #'
 #' @export plot_outliers_mahalanobis
 #' @keywords plot mahalanobis outliers
-#' @return Returns Method, Max distance, number of outliers, Outliers positions
 #' @return None
 #' @examples
 #' ## Run plot_outliers_mahalanobis

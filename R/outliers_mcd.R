@@ -3,13 +3,13 @@
 #' Detecting multivariate outliers using the Minimum Covariance Determinant approach
 #'
 #' @param x matrix of bivariate values from which we want to compute outliers
-#' @param h when using the MMCD method, proportion of dataset to use in order to compute sample means and covariances
+#' @param h proportion of dataset to use in order to compute sample means and covariances
 #' @param alpha nominal type I error probability (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'
 #' @export outliers_mcd
 #' @keywords MMCD outliers
-#' @return Returns Method, Max distance, number of outliers, Outliers positions
+#' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mcd
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
