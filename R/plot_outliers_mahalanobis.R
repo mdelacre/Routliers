@@ -20,7 +20,6 @@
 #' HSC <- rowMeans(Attacks[,22:46])
 #' plot_outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
 #' @importFrom stats mahalanobis cov lm na.omit qchisq
-#' @importFrom MASS cov.mcd
 #' @importFrom graphics abline legend par points
 
 plot_outliers_mahalanobis <- function(x,
