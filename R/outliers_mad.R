@@ -10,7 +10,7 @@
 #' @export outliers_mad
 #' @keywords MAD outliers
 #'
-#' @return Returns median, MAD, lower MAD limit, upper MAD limit, extremely small values, extremely high values
+#' @return Returns Call, median, MAD, lower and upper limits of acceptable range of values, number of outliers
 #' @examples
 #' ## Run outliers_mad
 #'
@@ -24,9 +24,9 @@
 
 # Create a function that compute all required parameters
 outliers_madEst <- function(x,
-                      b = 1.4826,
-                      threshold = 3,
-                      na.rm = TRUE){
+                            b = 1.4826,
+                            threshold = 3,
+                            na.rm = TRUE){
 
   # If data are numeric or integer, applying the function. Otherwise, stopping it.
   if(inherits(x,c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
