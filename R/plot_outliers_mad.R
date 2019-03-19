@@ -17,14 +17,14 @@
 #' plot_outliers_mad(x = Intention$Total_Amount_Earned)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' plot_outliers_mad(x = SOC)
- #'
+#'
 #' @importFrom stats na.omit
 #' @importFrom graphics par points rect segments text title
 
 plot_outliers_mad <- function(data,
-                      b = 1.4826,
-                      threshold = 3,
-                      na.rm = TRUE){
+                              b = 1.4826,
+                              threshold = 3,
+                              na.rm = TRUE){
 
   if(inherits(data,c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
 
@@ -46,28 +46,28 @@ plot_outliers_mad <- function(data,
   outliers_pos <- c(which(dat < LL_CI_MAD),which(dat > UL_CI_MAD))
 
   # plotting results
-    par(mar = c(5.1,3.1,5.1,1.1))
-    plot(NA,xlim = c(min(min(dat),LL_CI_MAD)-.1*(max(dat)-min(dat)),max(max(dat),UL_CI_MAD)+.1*(max(dat)-min(dat))),ylim = c(0,1), bty = "n",yaxt = "n", ylab = "",xlab = "")
-    rect(LL_CI_MAD,.25,UL_CI_MAD,.45,col = "lightgrey", border = "lightgrey", lwd = par("lwd"))
+  par(mar = c(5.1,3.1,5.1,1.1))
+  plot(NA,xlim = c(min(min(dat),LL_CI_MAD)-.1*(max(dat)-min(dat)),max(max(dat),UL_CI_MAD)+.1*(max(dat)-min(dat))),ylim = c(0,1), bty = "n",yaxt = "n", ylab = "",xlab = "")
+  rect(LL_CI_MAD,.25,UL_CI_MAD,.45,col = "lightgrey", border = "lightgrey", lwd = par("lwd"))
 
-    if(LL_CI_MAD != UL_CI_MAD){
+  if(LL_CI_MAD != UL_CI_MAD){
     segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd = 1)
     text(LL_CI_MAD,.45,"lower CI limit",lwd = 1,pos = 3,cex = .75)
     segments(UL_CI_MAD,0.25,UL_CI_MAD,0.45, lwd = 1)
     text(UL_CI_MAD,.45,"upper CI limit",lwd = 1,pos = 3,cex = .75)
     segments(center,0.25,center,0.45, lwd = 3,col = "red")
     text(center,.45,"median",lwd = 1,pos = 3,cex = .75,col = "red")
-    } else if (LL_CI_MAD == UL_CI_MAD){
-      segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd = 1)
-      text(LL_CI_MAD,.45,paste0("lower = upper","\n","CI limit"),lwd = 1,pos = 3,cex = .75)
-    }
-    if (length(outliers) != 0){
-        points(dat[outliers_pos],rep(.35,length(outliers_pos)),col = "red",bg = "red",pch = 19,cex = .5)}
+  } else if (LL_CI_MAD == UL_CI_MAD){
+    segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd = 1)
+    text(LL_CI_MAD,.45,paste0("lower = upper","\n","CI limit"),lwd = 1,pos = 3,cex = .75)
+  }
+  if (length(outliers) != 0){
+    points(dat[outliers_pos],rep(.35,length(outliers_pos)),col = "red",bg = "red",pch = 19,cex = .5)}
 
-        title(main = paste("Detecting values out of the Confidence Interval \n CI = Median","\u00B1",threshold," MAD"))
+  title(main = paste("Detecting values out of the Confidence Interval \n CI = Median","\u00B1",threshold," MAD"))
 
-        if(length(dat[outliers_pos]) == 0){comment <- "No outliers are detected"
-        } else {comment <- paste(length(outliers),"outliers are detected")}
+  if(length(dat[outliers_pos]) == 0){comment <- "No outliers are detected"
+  } else {comment <- paste(length(outliers),"outliers are detected")}
 
         legend("top",comment,pch = 1,col = "white",cex = 1,bty = "n")
 }
