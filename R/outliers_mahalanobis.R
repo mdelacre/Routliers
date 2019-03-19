@@ -29,7 +29,7 @@ outliers_mahalanobisEst <- function(x,
     data <- na.omit(x)
   } else {data <- x}
 
-  for (i in 1:ncol(data)){
+  for (i in seq_len(ncol(data))){
     if(inherits(data[,i],c("numeric","integer")) == FALSE)
       stop("Data are neither numeric nor integer")
   }

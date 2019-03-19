@@ -31,7 +31,7 @@ plot_outliers_mahalanobis <- function(x,
     data <- na.omit(x)
   } else {data <- x}
 
-  for (i in 1:ncol(data)){
+  for (i in seq_len(ncol(data))){
     if(inherits(data[,i],c("numeric","integer")) == FALSE)
       stop("Data are neither numeric nor integer")
   }
@@ -59,8 +59,8 @@ plot_outliers_mahalanobis <- function(x,
     mod <- lm(dat2[,2]~dat2[,1])              # regression line computed without outliers
     abline(mod,col = "darkgreen")}
   par(xpd = TRUE,mar = c(2,2,4,2))
-    if (length(names_outliers) == 0){
-      legend(x = "top",
+  if (length(names_outliers) == 0){
+    legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
              legend = "Regression line",
