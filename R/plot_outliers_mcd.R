@@ -23,9 +23,9 @@
 #' @importFrom graphics abline legend par points
 
 plot_outliers_mcd <- function(x,
-                      h = .5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
-                      alpha = .01,
-                      na.rm = TRUE){
+                              h = .5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
+                              alpha = .01,
+                              na.rm = TRUE){
 
   if (na.rm == TRUE) {
     data <- na.omit(x)
@@ -49,13 +49,13 @@ plot_outliers_mcd <- function(x,
   if (length(names_outliers) != 0){rownames(outliers) = paste("POS",names_outliers)}
 
   # plotting results
-    par(xpd = FALSE)
-    plot(data[,1],data[,2],xlab = "X",ylab = "Y",pch = 19,cex = .5)
-    center <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h)$center
-    abline(h = center[2],col = "lightgrey",lty = 2)
-    abline(v = center[1],col = "lightgrey",lty = 2)
-    abline(lm(data[,2]~data[,1]),col = "darkviolet") # regression line, based on ALL values (y = dv, x = predictor)
-    if (length(names_outliers) > 0){           # if there are outliers, compute the regression line excluding it
+  par(xpd = FALSE)
+  plot(data[,1],data[,2],xlab = "X",ylab = "Y",pch = 19,cex = .5)
+  center <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h)$center
+  abline(h = center[2],col = "lightgrey",lty = 2)
+  abline(v = center[1],col = "lightgrey",lty = 2)
+  abline(lm(data[,2]~data[,1]),col = "darkviolet") # regression line, based on ALL values (y = dv, x = predictor)
+  if (length(names_outliers) > 0){           # if there are outliers, compute the regression line excluding it
       dat2 <- data[-names_outliers,]           # matrix without outliers (IF there are outliers)
       mod <- lm(dat2[,2]~dat2[,1])              # regression line computed without outliers
       abline(mod,col = "darkgreen")}
