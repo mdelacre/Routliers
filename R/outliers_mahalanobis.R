@@ -35,7 +35,7 @@ outliers_mahalanobisEst <- function(x,
 
   #Creating covariance matrix for Minimum Covariance Determinant
   output <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h) # by default, use the "best" method = exhaustive method
-  cutoff <- (qchisq(p = 1-alpha, df = ncol(data))) # how to compute df? Read the text and add it (2 si 2 variables, c dc tj ?gal ? k? ? checker)
+  cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   # cor = FALSE to avoid useless output(correlation matrix)
 
   #Distances from centroid for each matrix
