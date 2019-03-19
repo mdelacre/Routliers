@@ -17,7 +17,6 @@
 #' res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
 #'
 #' @importFrom stats mahalanobis cov na.omit qchisq
-#' @importFrom MASS cov.mcd
 
 outliers_mahalanobisEst <- function(x,
                       alpha = .01,
@@ -54,10 +53,9 @@ outliers_mahalanobis <- function(x,...) UseMethod ("outliers_mahalanobis")
 
 # Adding a default method in defining a function called outliers_mcd.default
 
-outliers_mahalanobis.default <- function(x,h = .5,alpha = .01,na.rm = TRUE){
+outliers_mahalanobis.default <- function(x,alpha = .01,na.rm = TRUE){
   out <- outliers_mahalanobisEst(x,alpha,na.rm)
   out$distance <- out$MaxDist
-  out$center <- out$center
   out$call <- match.call()
   out$nb <- c(total = length(out$nbrow))
 
