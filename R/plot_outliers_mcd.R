@@ -15,6 +15,7 @@
 #' @return None
 #' @examples
 #' ## Run plot_outliers_mcd
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,22:46])
 #' plot_outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
@@ -36,7 +37,10 @@ plot_outliers_mcd <- function(x,
   }
 
   #Creating covariance matrix for Minimum Covariance Determinant
-  output <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h) # by default, use the "best" method = exhaustive method
+  # by default, use the "best" method = exhaustive method
+  output <- cov.mcd(data,
+                    cor = FALSE,
+                    quantile.used = nrow(data)*h)
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   # cor = FALSE to avoid useless output(correlation matrix)
 
@@ -44,7 +48,8 @@ plot_outliers_mcd <- function(x,
   dist <- mahalanobis(data,output$center,output$cov) # distance
   #Detecting outliers
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],y_axis = data[,2][dist > cutoff])
+  coordinates <- list(x_axis = data[,1][dist > cutoff],
+                      y_axis = data[,2][dist > cutoff])
   outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
   if (length(names_outliers) != 0){rownames(outliers) = paste("POS",names_outliers)}
 
@@ -54,22 +59,66 @@ plot_outliers_mcd <- function(x,
   center <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h)$center
   abline(h = center[2],col = "lightgrey",lty = 2)
   abline(v = center[1],col = "lightgrey",lty = 2)
-  abline(lm(data[,2]~data[,1]),col = "darkviolet") # regression line, based on ALL values (y = dv, x = predictor)
-  if (length(names_outliers) > 0){           # if there are outliers, compute the regression line excluding it
-      dat2 <- data[-names_outliers,]           # matrix without outliers (IF there are outliers)
-      mod <- lm(dat2[,2]~dat2[,1])              # regression line computed without outliers
+  # regression line, based on ALL values (y = dv, x = predictor)
+  abline(lm(data[,2]~data[,1]),col = "darkviolet")
+  # if there are outliers, compute the regression line excluding it
+  if (length(names_outliers) > 0){
+      dat2 <- data[-names_outliers,]    # matrix without outliers (IF there are outliers)
+      mod <- lm(dat2[,2]~dat2[,1])      # regression line computed without outliers
       abline(mod,col = "darkgreen")}
     par(xpd = TRUE,mar = c(2,2,4,2))
     if (length(names_outliers) == 0){
-      legend(x = "top",xjust = "centered",inset = c(0,-.2),legend = "Regression line",fill = "darkviolet",box.lty = 0)
+      legend(x = "top",
+             xjust = "centered",
+             inset = c(0,-.2),
+             legend = "Regression line",
+             fill = "darkviolet",
+             box.lty = 0)
     } else if (length(names_outliers) == 1){
-      points(data[names_outliers,][1],data[names_outliers,][2],col = "red",bg = "red",pch = 19,cex = .5)
-      text(data[names_outliers,][1],data[names_outliers,][2], as.character(names_outliers),pos = 4,cex = .75,col = "red")
-      legend(x = "top",xjust = "centered",inset = c(0,-.2),legend = c("Regression line including all data","Regression line without detected outliers"),fill = c("darkviolet","darkgreen"),box.lty = 0)
+      points(data[names_outliers,][1],
+             data[names_outliers,][2],
+             col = "red",
+             bg = "red",
+             pch = 19,
+             cex = .5)
+
+      text(data[names_outliers,][1],
+           data[names_outliers,][2],
+           as.character(names_outliers),
+           pos = 4,
+           cex = .75,
+           col = "red")
+
+      legend(x = "top",
+             xjust = "centered",
+             inset = c(0,-.2),
+             legend = c("Regression line including all data",
+                        "Regression line without detected outliers"),
+             fill = c("darkviolet","darkgreen"),
+             box.lty = 0)
+
     } else if (length(names_outliers) > 1){
-      points(data[names_outliers,][,1],data[names_outliers,][,2],col = "red",bg = "red",pch = 19,cex = .5)
-      text(data[names_outliers,][,1],data[names_outliers,][,2], as.character(names_outliers),pos = 4,cex = .75,col = "red")
-      legend(x = "top",xjust = "centered",inset = c(0,-.2),legend = c("Regression line including all data","Regression line without detected outliers"),fill = c("darkviolet","darkgreen"),box.lty = 0)}
+      points(data[names_outliers,][,1],
+             data[names_outliers,][,2],
+             col = "red",
+             bg = "red",
+             pch = 19,
+             cex = .5)
+
+      text(data[names_outliers,][,1],
+           data[names_outliers,][,2],
+           as.character(names_outliers),
+           pos = 4,
+           cex = .75,
+           col = "red")
+
+      legend(x = "top",
+             xjust = "centered",
+             inset = c(0,-.2),
+             legend = c("Regression line including all data",
+                        "Regression line without detected outliers"),
+             fill = c("darkviolet","darkgreen"),
+             box.lty = 0)}
 
 }
 

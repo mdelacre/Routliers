@@ -12,6 +12,7 @@
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mcd
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,22:46])
 #' res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
@@ -33,7 +34,8 @@ outliers_mcdEst <- function(x,
   }
 
   #Creating covariance matrix for Minimum Covariance Determinant
-  output <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h) # by default, use the "best" method = exhaustive method
+  # by default, use the "best" method = exhaustive method
+  output <- cov.mcd(data,cor = FALSE,quantile.used = nrow(data)*h)
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   # cor = FALSE to avoid useless output(correlation matrix)
 
@@ -41,7 +43,8 @@ outliers_mcdEst <- function(x,
   dist <- mahalanobis(data,output$center,output$cov) # distance
   #Detecting outliers
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],y_axis = data[,2][dist > cutoff])
+  coordinates <- list(x_axis = data[,1][dist > cutoff],
+                      y_axis = data[,2][dist > cutoff])
   outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
   if (length(names_outliers) != 0){rownames(outliers) <- paste("POS",names_outliers)}
 
@@ -80,5 +83,6 @@ print.outliers_mcd <- function(x){
   print(x$nb)
 
 }
+
 
 

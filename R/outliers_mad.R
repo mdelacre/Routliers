@@ -10,15 +10,20 @@
 #' @export outliers_mad
 #' @keywords MAD outliers
 #'
-#' @return Returns Call, median, MAD, lower and upper limits of acceptable range of values, number of outliers
+#' @return Returns Call, median, MAD, limits of acceptable range of values, number of outliers
 #' @examples
 #' ## Run outliers_mad
 #'
 #' outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
+#' data(Intention)
 #' res <- outliers_mad(x = Intention$age)
-#' outliers_mad(x = Intention$Total_Amount_Earned)
+#' res
+#' res2 <- outliers_mad(x = Intention$Total_Amount_Earned)
+#' res2
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' outliers_mad(x = SOC)
+#' res3 <- outliers_mad(x = SOC)
+#' res3
 #'
 #' @importFrom stats na.omit
 
@@ -49,7 +54,14 @@ outliers_madEst <- function(x,
   outliers_pos <- c(which(data < LL_CI_MAD),which(data > UL_CI_MAD))
 
   # Return results in list()
-   invisible(list(Median = center, MAD = MAD, LL_CI_MAD = LL_CI_MAD,UL_CI_MAD = UL_CI_MAD,L_outliers = data[data < LL_CI_MAD],U_outliers = data[data > UL_CI_MAD],outliers = c(data[data < LL_CI_MAD],data[data > UL_CI_MAD])))
+   invisible(list(Median = center,
+                  MAD = MAD,
+                  LL_CI_MAD = LL_CI_MAD,
+                  UL_CI_MAD = UL_CI_MAD,
+                  L_outliers = data[data < LL_CI_MAD],
+                  U_outliers = data[data > UL_CI_MAD],
+                  outliers = c(data[data < LL_CI_MAD],
+                               data[data > UL_CI_MAD])))
 
 }
 
@@ -64,7 +76,9 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   out$MAD <- out$MAD
   out$call <- match.call()
   out$limits <- c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD)
-  out$nb <- c("extremely low" = length(out$L_outliers),"extremely high" = length(out$U_outliers),total = length(out$outliers))
+  out$nb <- c("extremely low" = length(out$L_outliers),
+              "extremely high" = length(out$U_outliers),
+              total = length(out$outliers))
 
   class(out) <- "outliers_mad"
   out
@@ -87,6 +101,7 @@ print.outliers_mad <- function(x){
   cat("\nNumber of detected outliers\n")
   print(x$nb)
 }
+
 
 
 

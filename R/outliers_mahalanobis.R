@@ -12,23 +12,26 @@
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mahalanobis
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,22:46])
 #' res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+#' res
 #'
 #'
 #' @importFrom stats mahalanobis cov na.omit qchisq
 
 outliers_mahalanobisEst <- function(x,
-                      alpha = .01,
-                      na.rm = TRUE){
+                                    alpha = .01,
+                                    na.rm = TRUE){
 
   if (na.rm == TRUE) {
     data <- na.omit(x)
   } else {data <- x}
 
   for (i in 1:ncol(data)){
-    if(inherits(data[,i],c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+    if(inherits(data[,i],c("numeric","integer")) == FALSE)
+      stop("Data are neither numeric nor integer")
   }
 
   #Distances from centroid for each matrix
@@ -37,9 +40,11 @@ outliers_mahalanobisEst <- function(x,
   #Detecting outliers
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],y_axis = data[,2][dist > cutoff])
+  coordinates <- list(x_axis = data[,1][dist > cutoff],
+                      y_axis = data[,2][dist > cutoff])
   outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
-  if (length(names_outliers) != 0){rownames(outliers) <- paste("POS",names_outliers)}
+  if (length(names_outliers) != 0){
+    rownames(outliers) <- paste("POS",names_outliers)}
 
   # print results
   meth <- "Mahalanobis distance"

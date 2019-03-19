@@ -16,6 +16,7 @@
 #' @return None
 #' @examples
 #' ## Run plot_outliers_mahalanobis
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,22:46])
 #' plot_outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
@@ -31,7 +32,8 @@ plot_outliers_mahalanobis <- function(x,
   } else {data <- x}
 
   for (i in 1:ncol(data)){
-    if(inherits(data[,i],c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+    if(inherits(data[,i],c("numeric","integer")) == FALSE)
+      stop("Data are neither numeric nor integer")
   }
 
   #Distances from centroid for each matrix
@@ -49,22 +51,63 @@ plot_outliers_mahalanobis <- function(x,
   plot(data[,1],data[,2],xlab = "X",ylab = "Y",pch = 19,cex = .5)
   abline(h = colMeans(data)[2],col = "lightgrey",lty = 2)
   abline(v = colMeans(data)[1],col = "lightgrey",lty = 2)
-  abline(lm(data[,2]~data[,1]),col = "darkviolet") # regression line, based on ALL values (y = dv, x = predictor)
-  if (length(names_outliers) > 0){           # if there are outliers, compute the regression line excluding it
+  # regression line, based on ALL values (y = dv, x = predictor)
+  abline(lm(data[,2]~data[,1]),col = "darkviolet")
+  # if there are outliers, compute the regression line excluding it
+  if (length(names_outliers) > 0){
     dat2 <- data[-names_outliers,]           # matrix without outliers (IF there are outliers)
     mod <- lm(dat2[,2]~dat2[,1])              # regression line computed without outliers
     abline(mod,col = "darkgreen")}
   par(xpd = TRUE,mar = c(2,2,4,2))
     if (length(names_outliers) == 0){
-      legend(x = "top",xjust = "centered",inset = c(0,-.2),legend = "Regression line",fill = "darkviolet",box.lty = 0)
+      legend(x = "top",
+             xjust = "centered",
+             inset = c(0,-.2),
+             legend = "Regression line",
+             fill = "darkviolet",
+             box.lty = 0)
     } else if (length(names_outliers) == 1){
-      points(data[names_outliers,][1],data[names_outliers,][2],col = "red",bg = "red",pch = 19,cex = .5)
-      text(data[names_outliers,][1],data[names_outliers,][2], as.character(names_outliers),pos = 4,cex = .75,col = "red")
-      legend(x = "top",xjust = "centered",inset = c(0,-.2),legend = c("Regression line including all data","Regression line without detected outliers"),fill = c("darkviolet","darkgreen"),box.lty = 0)
+      points(data[names_outliers,][1],
+             data[names_outliers,][2],
+             col = "red",
+             bg = "red",
+             pch = 19,
+             cex = .5)
+      text(data[names_outliers,][1],
+           data[names_outliers,][2],
+           as.character(names_outliers),
+           pos = 4,
+           cex = .75,
+           col = "red")
+      legend(x = "top",
+             xjust = "centered",
+             inset = c(0,-.2),
+             legend = c("Regression line including all data",
+                        "Regression line without detected outliers"),
+             fill = c("darkviolet","darkgreen"),
+             box.lty = 0)
     } else if (length(names_outliers) > 1){
-      points(data[names_outliers,][,1],data[names_outliers,][,2],col = "red",bg = "red",pch = 19,cex = .5)
-      text(data[names_outliers,][,1],data[names_outliers,][,2], as.character(names_outliers),pos = 4,cex = .75,col = "red")
-      legend( x = "top",xjust = "centered",inset = c(0,-.2),legend = c("Regression line including all data","Regression line without detected outliers"),fill = c("darkviolet","darkgreen"),box.lty = 0)}
+      points(data[names_outliers,][,1],
+             data[names_outliers,][,2],
+             col = "red",
+             bg = "red",
+             pch = 19,
+             cex = .5)
+
+      text(data[names_outliers,][,1],
+           data[names_outliers,][,2],
+           as.character(names_outliers),
+           pos = 4,
+           cex = .75,
+           col = "red")
+
+      legend( x = "top",
+              xjust = "centered",
+              inset = c(0,-.2),
+              legend = c("Regression line including all data",
+                         "Regression line without detected outliers"),
+              fill = c("darkviolet","darkgreen"),
+              box.lty = 0)}
 
 }
 
