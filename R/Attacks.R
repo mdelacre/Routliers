@@ -64,8 +64,9 @@
 #'   \item{hsc25}{Sentiment d etre inutile}
 #' }
 #'
-#' @source \href{https://github.com/mdelacre/Routliers/blob/master/data/Attacks.RData}
+#' @source
+#' \href{https://github.com/mdelacre/Routliers/blob/master/data/Attacks.RData}
 #'
 #' @keywords Brussels Attacks Anxiety Depression Coherence
-#'
+
 "Attacks"
