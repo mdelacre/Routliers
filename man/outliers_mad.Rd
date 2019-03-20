@@ -26,14 +26,15 @@ Detecting univariate outliers using the robust median absolute deviation
 }
 \examples{
 ## Run outliers_mad
-#outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
-#data(Intention)
-#outliers_mad(x = Intention$age)
-#outliers_mad(x = Intention$Total_Amount_Earned)
-#data(Attacks)
-#SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
-#"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#outliers_mad(x = SOC)
+x <- runif(150,-100,100)
+res=outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
+data(Intention)
+outliers_mad(x = Intention$age)
+outliers_mad(x = Intention$Total_Amount_Earned)
+data(Attacks)
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+res=outliers_mad(x = SOC)
 
 }
 \keyword{MAD}

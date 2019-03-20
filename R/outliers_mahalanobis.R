@@ -7,15 +7,16 @@
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'
 #' @export outliers_mahalanobis
+#' @export outliers_mahalanobis.default
 #'
 #' @keywords mahalanobis outliers
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mahalanobis
-#' #data(Attacks)
-#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' #HSC <- rowMeans(Attacks[,22:46])
-#' #res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+#' data(Attacks)
+#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' HSC <- rowMeans(Attacks[,22:46])
+#' res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
 #'
 #' @importFrom stats mahalanobis cov na.omit qchisq
 

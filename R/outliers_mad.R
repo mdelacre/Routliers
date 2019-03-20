@@ -11,23 +11,25 @@
 #' - defaults to TRUE
 #'
 #' @export outliers_mad
+#' @export outliers_mad.default
 #' @keywords MAD outliers
 #' @return Returns Call, median, MAD, limits of acceptable range of values, number of outliers
 #' @examples
 #' ## Run outliers_mad
-#' #outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
-#' #data(Intention)
-#' #outliers_mad(x = Intention$age)
-#' #outliers_mad(x = Intention$Total_Amount_Earned)
-#' #data(Attacks)
-#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
-#' #"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' #outliers_mad(x = SOC)
+#' x <- runif(150,-100,100)
+#' res=outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
+#' data(Intention)
+#' outliers_mad(x = Intention$age)
+#' outliers_mad(x = Intention$Total_Amount_Earned)
+#' data(Attacks)
+#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+#' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' res=outliers_mad(x = SOC)
 #'
 #' @importFrom stats na.omit
 
 # Create a generic function
-outliers_mad <- function(x,b,threshold,na.rm) UseMethod("outliers_mad",c("numeric","integer"))
+outliers_mad <- function(x,b,threshold,na.rm) UseMethod("outliers_mad")
 
 # Create a function that compute all required parameters
 outliers_madEst <- function(x,
@@ -36,7 +38,7 @@ outliers_madEst <- function(x,
                             na.rm = TRUE){
 
   # If data are numeric or integer, applying the function. Otherwise, stopping it.
-  if(inherits(x,c("numeric","integer","double")) == FALSE) stop("Data are neither numeric nor integer")
+  if(inherits(x,c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
 
   if (na.rm == TRUE) {
     data <- na.omit(x)   # incomplete cases are removed
@@ -72,11 +74,15 @@ outliers_madEst <- function(x,
 outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
 
   x = as.numeric(x)
+  b = as.numeric(b)
+  threshold = as.numeric(threshold)
+  na.rm = as.logical(na.rm)
+
   out <- outliers_madEst(x,b,threshold,na.rm)
   out$median <- out$Median
   out$MAD <- out$MAD
   out$call <- match.call()
-  out$limits <- c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD)
+  out$limits <- as.vector(c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD))
   out$nb <- c("extremely low" = length(out$L_outliers),
               "extremely high" = length(out$U_outliers),
               total = length(out$outliers))
@@ -101,6 +107,7 @@ print.outliers_mad <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   cat("\nNumber of detected outliers\n")
   print(x$nb)
 }
+
 
 
 

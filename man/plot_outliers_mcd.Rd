@@ -4,12 +4,12 @@
 \alias{plot_outliers_mcd}
 \title{Plotting function for the MCD}
 \usage{
-plot_outliers_mcd(x, h = 0.5, alpha = 0.01, na.rm = TRUE)
+plot_outliers_mcd(x, h = 0.75, alpha = 0.01, na.rm = TRUE)
 }
 \arguments{
 \item{x}{matrix of bivariate values from which we want to compute outliers}
 
-\item{h}{when using the MMCD method, proportion of dataset to use in order to compute sample means and covariances}
+\item{h}{proportion of dataset to use in order to compute sample means and covariances}
 
 \item{alpha}{nominal type I error probability (by default .01)}
 
@@ -26,10 +26,10 @@ influence of outliers on the regression line.
 }
 \examples{
 ## Run plot_outliers_mcd
-#data(Attacks)
-#SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#HSC <- rowMeans(Attacks[,22:46])
-#plot_outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+data(Attacks)
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+HSC <- rowMeans(Attacks[,22:46])
+plot_outliers_mcd(x = cbind(SOC,HSC),na.rm = TRUE)
 }
 \keyword{MMCD}
 \keyword{outliers}

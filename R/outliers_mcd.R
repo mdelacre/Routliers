@@ -8,14 +8,15 @@
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'
 #' @export outliers_mcd
+#' @export outliers_mcd.default
 #' @keywords MMCD outliers
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mcd
-#' #data(Attacks)
-#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' #HSC <- rowMeans(Attacks[,22:46])
-#' #res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+#' data(Attacks)
+#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' HSC <- rowMeans(Attacks[,22:46])
+#' res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
 #'
 #' @importFrom stats mahalanobis na.omit qchisq
 #' @importFrom MASS cov.mcd
