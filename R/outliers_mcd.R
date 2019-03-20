@@ -12,13 +12,16 @@
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
 #' ## Run outliers_mcd
-#' data(Attacks)
-#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
-#' res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
-#' res
+#' #data(Attacks)
+#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' #HSC <- rowMeans(Attacks[,22:46])
+#' #res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+#'
 #' @importFrom stats mahalanobis na.omit qchisq
 #' @importFrom MASS cov.mcd
+
+# Create a generic function
+outliers_mcd <- function(x,h,alpha,na.rm) UseMethod("outliers_mcd")
 
 outliers_mcdEst <- function(x,
                       h = .5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
@@ -55,9 +58,6 @@ outliers_mcdEst <- function(x,
     invisible(list(MaxDist = cutoff, center = output$center,nbrow = names_outliers))
 
 }
-
-# Create a generic function
-outliers_mcd <- function(x,...) UseMethod ("outliers_mcd")
 
 # Adding a default method in defining a function called outliers_mcd.default
 

@@ -1,8 +1,8 @@
-#' #' Plotting function for the Mahalanobis distance approach
+#' Plotting function for the Mahalanobis distance approach
 #'
 #' plotting data and highlighting multivariate outliers detected with the mahalanobis distance approach
 #'
-#' #' plotting data and highlighting multivariate outliers detected with the MCD function
+#' plotting data and highlighting multivariate outliers detected with the MCD function
 #' Additionnally, the plot return two regression lines: the first one including all data and
 #' the second one including all observations but the detected outliers. It allows to observe how much the outliers
 #' influence of outliers on the regression line.
@@ -16,10 +16,11 @@
 #' @return None
 #' @examples
 #' ## Run plot_outliers_mahalanobis
-#' data(Attacks)
-#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
-#' plot_outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+#' #data(Attacks)
+#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' #HSC <- rowMeans(Attacks[,22:46])
+#' #plot_outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+#'
 #' @importFrom stats mahalanobis cov lm na.omit qchisq
 #' @importFrom graphics abline legend par points
 

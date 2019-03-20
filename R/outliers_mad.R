@@ -3,29 +3,31 @@
 #' Detecting univariate outliers using the robust median absolute deviation
 #'
 #' @param x vector of values from which we want to compute outliers
-#' @param b constant depending on the assumed distribution underlying the data, that equals 1/Q(0.75).  When the normal distribution is assumed, the constant 1.4826 is used (and it makes the MAD and SD of normal distributions comparable).
+#' @param b constant depending on the assumed distribution underlying the data, that equals 1/Q(0.75).
+#' When the normal distribution is assumed, the constant 1.4826 is used
+#' (and it makes the MAD and SD of normal distributions comparable).
 #' @param threshold the number of MAD considered as a threshold to consider a value an outlier
-#' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
+#' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE)
+#' - defaults to TRUE
 #'
 #' @export outliers_mad
 #' @keywords MAD outliers
-#'
 #' @return Returns Call, median, MAD, limits of acceptable range of values, number of outliers
 #' @examples
 #' ## Run outliers_mad
-#'
-#' outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
-#' data(Intention)
-#' res <- outliers_mad(x = Intention$age)
-#' res
-#' res2 <- outliers_mad(x = Intention$Total_Amount_Earned)
-#' res2
-#' data(Attacks)
-#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' res3 <- outliers_mad(x = SOC)
-#' res3
+#' #outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
+#' #data(Intention)
+#' #outliers_mad(x = Intention$age)
+#' #outliers_mad(x = Intention$Total_Amount_Earned)
+#' #data(Attacks)
+#' #SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+#' #"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' #outliers_mad(x = SOC)
 #'
 #' @importFrom stats na.omit
+
+# Create a generic function
+outliers_mad <- function(x,b,threshold,na.rm) UseMethod("outliers_mad",c("numeric","integer"))
 
 # Create a function that compute all required parameters
 outliers_madEst <- function(x,
@@ -34,7 +36,7 @@ outliers_madEst <- function(x,
                             na.rm = TRUE){
 
   # If data are numeric or integer, applying the function. Otherwise, stopping it.
-  if(inherits(x,c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+  if(inherits(x,c("numeric","integer","double")) == FALSE) stop("Data are neither numeric nor integer")
 
   if (na.rm == TRUE) {
     data <- na.omit(x)   # incomplete cases are removed
@@ -60,17 +62,16 @@ outliers_madEst <- function(x,
                   UL_CI_MAD = UL_CI_MAD,
                   L_outliers = data[data < LL_CI_MAD],
                   U_outliers = data[data > UL_CI_MAD],
-                  outliers = c(data[data < LL_CI_MAD],
-                               data[data > UL_CI_MAD])))
+                  outliers = c(data[data < LL_CI_MAD],data[data > UL_CI_MAD])))
 
 }
 
-# Create a generic function
-outliers_mad <- function(x,...) UseMethod ("outliers_mad")
 
 # Adding a default method in defining a function called outliers_mad.default
 
 outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
+
+  x = as.numeric(x)
   out <- outliers_madEst(x,b,threshold,na.rm)
   out$median <- out$Median
   out$MAD <- out$MAD
@@ -84,8 +85,7 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   out
   }
 
-class(x)
-print.outliers_mad <- function(x){
+print.outliers_mad <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   cat("Call:\n")
   print(x$call)
 

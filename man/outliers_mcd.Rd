@@ -4,32 +4,30 @@
 \alias{outliers_mcd}
 \title{MCD function to detect outliers}
 \usage{
-outliers_mcd(data, h = 0.5, alpha = 0.01, na.rm = TRUE,
-  verbose = TRUE)
+outliers_mcd(x, h, alpha, na.rm)
 }
 \arguments{
-\item{data}{matrix of bivariate values from which we want to compute outliers}
+\item{x}{matrix of bivariate values from which we want to compute outliers}
 
-\item{h}{when using the MMCD method, proportion of dataset to used in order to compute sample means and covariances}
+\item{h}{proportion of dataset to use in order to compute sample means and covariances}
 
-\item{alpha}{alpha value (by default .01)}
+\item{alpha}{nominal type I error probability (by default .01)}
 
-\item{na.rm}{set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE}
-
-\item{verbose}{logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE}
+\item{na.rm}{set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE}
 }
 \value{
-Returns Method, Max distance, number of outliers, Outliers positions
+Returns Call, Max distance, number of outliers
 }
 \description{
 Detecting multivariate outliers using the Minimum Covariance Determinant approach
 }
 \examples{
 ## Run outliers_mcd
-SOC=rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-outliers_mad(data=SOC)
-HSC=rowMeans(Attacks[,22:46])
-outliers_mcd(data=cbind(SOC,HSC), h=.5,na.rm=TRUE,verbose=TRUE)
+#data(Attacks)
+#SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#HSC <- rowMeans(Attacks[,22:46])
+#res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+
 }
 \keyword{MMCD}
 \keyword{outliers}

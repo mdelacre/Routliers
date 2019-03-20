@@ -4,19 +4,16 @@
 \alias{plot_outliers_mad}
 \title{Plotting function for the mad}
 \usage{
-plot_outliers_mad(data, b = 1.4826, threshold = 3, na.rm = TRUE,
-  verbose = TRUE)
+plot_outliers_mad(x, b = 1.4826, threshold = 3, na.rm = TRUE)
 }
 \arguments{
-\item{data}{vector of numeric values from which we want to compute outliers}
+\item{x}{vector of numeric values from which we want to compute outliers}
 
 \item{b}{constant depending on the assumed distribution underlying the data, that equals 1/Q(0.75).  When the normal distribution is assumed, the constant 1.4826 is used (and it makes the MAD and SD of normal distributions comparable).}
 
 \item{threshold}{the number of MAD considered as a threshold to consider a value an outlier}
 
-\item{na.rm}{set whether Missing Values should be excluded (na.rm=TRUE) or not (na.rm=FALSE) - defaults to TRUE}
-
-\item{verbose}{logical variable indicating whether text output should be generated (verbose = TRUE) or not (verbose = FALSE) - default to TRUE}
+\item{na.rm}{set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE}
 }
 \value{
 None
@@ -26,11 +23,13 @@ plotting data and highlighting univariate outliers detected with the MAD functio
 }
 \examples{
 ## Run plot_outliers_mad
-plot_outliers_mad(data=runif(150,-100,100), b=1.4826,threshold=3,na.rm=TRUE,verbose=TRUE)
-plot_outliers_mad(data=Intention$age)
-plot_outliers_mad(data=Intention$Total_Amount_Earned)
-SOC=rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-plot_outliers_mad(data=SOC)
+#plot_outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
+#data(Intention)
+#plot_outliers_mad(x = Intention$age)
+#plot_outliers_mad(x = Intention$Total_Amount_Earned)
+#data(Attacks)
+#SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#plot_outliers_mad(x = SOC)
 
 }
 \keyword{MAD}
