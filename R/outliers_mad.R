@@ -23,7 +23,8 @@
 #' #### Results can be stored in an object.
 #' data(Intention)
 #' res1=outliers_mad(Intention$age)
-#' # Moreover, a list of elements can be extracted from the function, such as all the extremely high values,
+#' # Moreover, a list of elements can be extracted from the function,
+#' # such as all the extremely high values,
 #' # That will be sorted in ascending order
 #  res1$U_outliers
 #'

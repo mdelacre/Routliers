@@ -13,7 +13,8 @@
 #' @examples
 #' #### Run plot_outliers_mad
 #' # When no outliers are detected, it is mentioned in the plot
-#' x <- c(-40.02945,-97.16041,15.16926,-165.42418,-118.96249,-183.80989,-188.29582,-82.17559,66.20465,63.78588)
+#' x <- c(-40.02945,-97.16041,15.16926,-165.42418,-118.96249,-183.80989,-188.29582,-82.17559,
+#' 66.20465,63.78588)
 #' plot_outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
 #'
 #' #### Results can be stored in an object.
