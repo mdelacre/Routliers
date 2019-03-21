@@ -15,12 +15,18 @@
 #' @keywords MAD outliers
 #' @return Returns Call, median, MAD, limits of acceptable range of values, number of outliers
 #' @examples
-#' ## Run outliers_mad
+#'
+#' #### Run outliers_mad
 #' x <- runif(150,-100,100)
-#' res=outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
+#' outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
+#'
+#' #### Results can be stored in an object.
 #' data(Intention)
-#' outliers_mad(x = Intention$age)
-#' outliers_mad(x = Intention$Total_Amount_Earned)
+#' res1=outliers_mad(Intention$age)
+#' # Moreover, a list of elements can be extracted from the function, such as all the extremely high values
+#  res1$U_outliers
+
+#' res2
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
 #' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
@@ -62,9 +68,9 @@ outliers_madEst <- function(x,
                   MAD = MAD,
                   LL_CI_MAD = LL_CI_MAD,
                   UL_CI_MAD = UL_CI_MAD,
-                  L_outliers = data[data < LL_CI_MAD],
-                  U_outliers = data[data > UL_CI_MAD],
-                  outliers = c(data[data < LL_CI_MAD],data[data > UL_CI_MAD])))
+                  L_outliers = sort(data[data < LL_CI_MAD]),
+                  U_outliers = sort(data[data > UL_CI_MAD]),
+                  outliers = sort(c(data[data < LL_CI_MAD],data[data > UL_CI_MAD]))))
 
 }
 
