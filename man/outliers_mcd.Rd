@@ -22,12 +22,22 @@ Returns Call, Max distance, number of outliers
 Detecting multivariate outliers using the Minimum Covariance Determinant approach
 }
 \examples{
-## Run outliers_mcd
+#### Run outliers_mcd
+# The default is to use 75\% of the datasets in order to compute sample means and covariances
+# This proportion equals 1-breakdown points (i.e. h = .75 <--> breakdown points = .25)
+# This breakdown points is encouraged by Leys et al. (2018)
 data(Attacks)
-SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-HSC <- rowMeans(Attacks[,22:46])
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r",
+"soc8","soc9","soc10r","soc11","soc12","soc13")])
+HSC <- rowMeans(Attacks[,21:45])
 res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+res
 
+# Moreover, a list of elements can be extracted from the function,
+# such as the position of outliers in the dataset
+# and the coordinates of outliers
+res$outliers_pos
+res$outliers_val
 }
 \keyword{MMCD}
 \keyword{outliers}

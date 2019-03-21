@@ -20,11 +20,19 @@ Returns Call, Max distance, number of outliers
 Detecting multivariate outliers using the Mahalanobis distance
 }
 \examples{
-## Run outliers_mahalanobis
+#### Run outliers_mahalanobis
 data(Attacks)
-SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-HSC <- rowMeans(Attacks[,22:46])
-res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r",
+"soc8","soc9","soc10r","soc11","soc12","soc13")])
+HSC <- rowMeans(Attacks[,21:45])
+res <- outliers_mahalanobis(x = cbind(SOC,HSC), na.rm = TRUE)
+res
+
+# A list of elements can be extracted from the function,
+# such as the position of outliers in the dataset
+# and the coordinates of outliers
+res$outliers_pos
+res$outliers_val
 
 }
 \keyword{mahalanobis}

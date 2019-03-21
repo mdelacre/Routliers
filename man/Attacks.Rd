@@ -3,7 +3,7 @@
 \docType{data}
 \name{Attacks}
 \alias{Attacks}
-\title{Data collected after the the attacks in Brussels assessing the Sense of Coherence (SOC-13 self report questionnaire; Antonovsky, 1987),
+\title{Data collected the day after the the terrorist attacks in Brussels (on the morning of 22 March 2016) assessing the Sense of Coherence (SOC-13 self report questionnaire; Antonovsky, 1987),
 anxiety and depression symptoms (HSCL-25; Derogatis et al., 1974) of 2077 subjects (1056 were in Brussels during the Brussels attacks, 1021 were not)}
 \format{A data frame with 2077 rows and 46 variables:
 \describe{

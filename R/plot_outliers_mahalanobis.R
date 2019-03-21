@@ -35,7 +35,7 @@
 #' plot_outliers_mahalanobis(x=cbind(c1,c2),pos_display=TRUE)
 #'
 #' @importFrom stats mahalanobis cov lm na.omit qchisq
-#' @importFrom graphics abline legend par points
+#' @importFrom graphics abline legend par points plot
 
 plot_outliers_mahalanobis <- function(x,
                                       alpha = .01,

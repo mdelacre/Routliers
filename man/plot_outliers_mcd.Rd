@@ -4,7 +4,8 @@
 \alias{plot_outliers_mcd}
 \title{Plotting function for the MCD}
 \usage{
-plot_outliers_mcd(x, h = 0.75, alpha = 0.01, na.rm = TRUE)
+plot_outliers_mcd(x, h = 0.75, alpha = 0.01, na.rm = TRUE,
+  pos_display = FALSE)
 }
 \arguments{
 \item{x}{matrix of bivariate values from which we want to compute outliers}
@@ -14,6 +15,9 @@ plot_outliers_mcd(x, h = 0.75, alpha = 0.01, na.rm = TRUE)
 \item{alpha}{nominal type I error probability (by default .01)}
 
 \item{na.rm}{set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE}
+
+\item{pos_display}{set whether the position of outliers in the dataset should be displayed on the graph (pos_display = TRUE)
+or not (posdisplay = FALSE)}
 }
 \value{
 None
@@ -25,11 +29,24 @@ the second one including all observations but the detected outliers. It allows t
 influence of outliers on the regression line.
 }
 \examples{
-## Run plot_outliers_mcd
+#### Run plot_outliers_mcd
 data(Attacks)
-SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-HSC <- rowMeans(Attacks[,22:46])
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+HSC <- rowMeans(Attacks[,21:45])
 plot_outliers_mcd(x = cbind(SOC,HSC),na.rm = TRUE)
+
+# it's also possible to display the position of the multivariate outliers ion the graph
+# preferably, when the number of multivariate outliers is not too high
+c1 <- c(1,4,3,6,5,2,1,3,2,4,7,3,6,3,4,6)
+c2 <- c(1,3,4,6,5,7,1,4,3,7,50,8,8,15,10,6)
+plot_outliers_mcd(x=cbind(c1,c2),pos_display=TRUE)
+
+# When no outliers are detected, only one regression line is displayed
+c1 <- c(1,4,3,6,5)
+c2 <- c(1,3,4,6,5)
+plot_outliers_mcd(x=cbind(c1,c2),pos_display=TRUE)
+
 }
 \keyword{MMCD}
 \keyword{outliers}

@@ -33,7 +33,7 @@
 #' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' outliers_mad(x = SOC)
 #'
-#' @importFrom stats na.omit
+#' @importFrom stats na.omit median
 
 # Create a generic function
 outliers_mad <- function(x,b,threshold,na.rm) UseMethod("outliers_mad")
@@ -52,8 +52,8 @@ outliers_madEst <- function(x,
   } else {data <- x}
 
   # Calculate the MAD
-  center <- median(data)
-  MAD <- b*median(abs(data-center))
+  center <- median(data) # computing the median of the data (i.e the center of the CI defining acceptable values)
+  MAD <- b*median(abs(data-center)) # computing the median of data centered around the sample median
   half_CI <- threshold*MAD # how many MAD from the median are the limits of the IC?
 
   # Calculate the range of acceptable values

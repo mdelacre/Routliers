@@ -36,7 +36,7 @@
 #'
 #' @importFrom stats mahalanobis lm na.omit qchisq
 #' @importFrom MASS cov.mcd
-#' @importFrom graphics abline legend par points
+#' @importFrom graphics abline legend par points plot
 
 plot_outliers_mcd <- function(x,
                               h = .75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)

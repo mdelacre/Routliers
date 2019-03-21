@@ -32,7 +32,7 @@
 #' plot_outliers_mad(x = SOC,threshold=2.5)
 #'
 #' @importFrom stats na.omit
-#' @importFrom graphics par points rect segments text title
+#' @importFrom graphics par points rect segments text title plot
 
 plot_outliers_mad <- function(x,
                               b = 1.4826,

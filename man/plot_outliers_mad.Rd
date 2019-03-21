@@ -22,14 +22,25 @@ None
 plotting data and highlighting univariate outliers detected with the MAD function
 }
 \examples{
-## Run plot_outliers_mad
-plot_outliers_mad(x = runif(150,-100,100), b = 1.4826,threshold = 3,na.rm = TRUE)
+#### Run plot_outliers_mad
+# When no outliers are detected, it is mentioned in the plot
+x <- c(-40.02945,-97.16041,15.16926,-165.42418,-118.96249,-183.80989,-188.29582,-82.17559,
+66.20465,63.78588)
+plot_outliers_mad(x, b = 1.4826,threshold = 3,na.rm = TRUE)
+
+#### Results can be stored in an object.
+# When there are outliers, number of detected outliers is mentioned in the plot
 data(Intention)
 plot_outliers_mad(x = Intention$age)
+# When the MAD is null, it is mentioned in the plot that the lower and upper limits of
+# the confidence intervals around the median are equal
 plot_outliers_mad(x = Intention$Total_Amount_Earned)
+
+# The width of the confidence interval is mention in the plot main
 data(Attacks)
-SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-plot_outliers_mad(x = SOC)
+SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+"soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+plot_outliers_mad(x = SOC,threshold=2.5)
 
 }
 \keyword{MAD}
