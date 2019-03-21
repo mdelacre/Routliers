@@ -29,6 +29,7 @@
 #  res1$U_outliers
 #'
 #' #### The function should be performed on dimension rather than on isolated items
+#' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
 #' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' outliers_mad(x = SOC)
