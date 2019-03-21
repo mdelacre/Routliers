@@ -83,6 +83,10 @@ plot_outliers_mcd <- function(x,
       abline(mod,col = "darkgreen")}
     par(xpd = TRUE,mar = c(2,2,4,2))
     if (length(names_outliers) == 0){
+      if(lm(data[,2]~data[,1])$coefficients[2] > 0){
+        sign="+"
+      } else {sign=""}
+
       legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
