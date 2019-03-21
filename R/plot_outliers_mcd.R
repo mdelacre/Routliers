@@ -17,7 +17,7 @@
 #' ## Run plot_outliers_mcd
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
+#' HSC <- rowMeans(Attacks[,21:45])
 #' plot_outliers_mcd(x = cbind(SOC,HSC),na.rm = TRUE)
 #' @importFrom stats mahalanobis lm na.omit qchisq
 #' @importFrom MASS cov.mcd
@@ -46,12 +46,11 @@ plot_outliers_mcd <- function(x,
 
   #Distances from centroid for each matrix
   dist <- mahalanobis(data,output$center,output$cov) # distance
+
   #Detecting outliers
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],
-                      y_axis = data[,2][dist > cutoff])
-  outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
-  if (length(names_outliers) != 0){rownames(outliers) = paste("POS",names_outliers)}
+  coordinates <- cbind(x_axis = data[,1][dist > cutoff],
+                       y_axis = data[,2][dist > cutoff])
 
   # plotting results
   par(xpd = FALSE)
@@ -89,13 +88,26 @@ plot_outliers_mcd <- function(x,
            cex = .75,
            col = "red")
 
-      legend(x = "top",
+      if(lm(data[,2]~data[,1])$coefficients[2] > 0){
+        sign="+"
+      } else {sign=NULL}
+
+      if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
+        sign2="+"
+      } else {sign2=NULL}
+
+            legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
-             legend = c("Regression line including all data",
-                        "Regression line without detected outliers"),
-             fill = c("darkviolet","darkgreen"),
-             box.lty = 0)
+             legend = c(
+               paste0("Regression line including all data: y = ",
+                      round(lm(data[,2]~data[,1])$coefficients[1],3),
+                      sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+                              paste0("Regression line without detected outliers: y = ",
+                                     round(mod$coefficients[1],3),sign2,
+                                     round(mod$coefficients[2],3),"x")),
+                              fill = c("darkviolet","darkgreen"),
+                              box.lty = 0)
 
     } else if (length(names_outliers) > 1){
       points(data[names_outliers,][,1],
@@ -115,10 +127,16 @@ plot_outliers_mcd <- function(x,
       legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
-             legend = c("Regression line including all data",
-                        "Regression line without detected outliers"),
+             legend = c(paste0("Regression line including all data: y = ",
+                               round(lm(data[,2]~data[,1])$coefficients[1],3),
+                               sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"X"),
+                        paste0("Regression line without detected outliers: y = ",
+                               round(mod$coefficients[1],3),sign2,
+                               round(mod$coefficients[2],3),"X")),
              fill = c("darkviolet","darkgreen"),
              box.lty = 0)}
+
+
 
 }
 

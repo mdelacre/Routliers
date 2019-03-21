@@ -18,7 +18,7 @@
 #' ## Run plot_outliers_mahalanobis
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
+#' HSC <- rowMeans(Attacks[,21:45])
 #' plot_outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
 #'
 #' @importFrom stats mahalanobis cov lm na.omit qchisq
@@ -44,8 +44,6 @@ plot_outliers_mahalanobis <- function(x,
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   names_outliers <- which(dist > cutoff)
   coordinates <- list(x_axis = data[,1][dist > cutoff],y_axis = data[,2][dist > cutoff])
-  outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
-  if (length(names_outliers) != 0){rownames(outliers) <- paste("POS",names_outliers)}
 
   # plotting results
   par(xpd = FALSE)
@@ -80,11 +78,18 @@ plot_outliers_mahalanobis <- function(x,
            pos = 4,
            cex = .75,
            col = "red")
+
+
       legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
-             legend = c("Regression line including all data",
-                        "Regression line without detected outliers"),
+             legend = c(
+               paste0("Regression line including all data: y = ",
+                      round(lm(data[,2]~data[,1])$coefficients[1],3),
+                      sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+               paste0("Regression line without detected outliers: y = ",
+                      round(mod$coefficients[1],3),sign2,
+                      round(mod$coefficients[2],3),"x")),
              fill = c("darkviolet","darkgreen"),
              box.lty = 0)
     } else if (length(names_outliers) > 1){
@@ -105,8 +110,13 @@ plot_outliers_mahalanobis <- function(x,
       legend( x = "top",
               xjust = "centered",
               inset = c(0,-.2),
-              legend = c("Regression line including all data",
-                         "Regression line without detected outliers"),
+              legend = c(
+                paste0("Regression line including all data: y = ",
+                       round(lm(data[,2]~data[,1])$coefficients[1],3),
+                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+                paste0("Regression line without detected outliers: y = ",
+                       round(mod$coefficients[1],3),sign2,
+                       round(mod$coefficients[2],3),"x")),
               fill = c("darkviolet","darkgreen"),
               box.lty = 0)}
 
