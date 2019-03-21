@@ -12,12 +12,20 @@
 #' @keywords MMCD outliers
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
-#' ## Run outliers_mcd
+#' #### Run outliers_mcd
+#' # The default is to use 75% of the datasets in order to compute sample means and covariances
+#' # This proportion equals 1-breakdown points (i.e. h = .75 <--> breakdown points = .25)
+#' # This breakdown points is encouraged by Leys et al. (2018)
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
+#' HSC <- rowMeans(Attacks[,21:45])
 #' res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
+#' res
 #'
+#' # Moreover, a list of elements can be extracted from the function, such as the position of outliers in the dataset
+#' # and the coordinates of outliers
+#' res$outliers_pos
+#' res$outliers_val
 #' @importFrom stats mahalanobis na.omit qchisq
 #' @importFrom MASS cov.mcd
 
@@ -25,7 +33,7 @@
 outliers_mcd <- function(x,h,alpha,na.rm) UseMethod("outliers_mcd")
 
 outliers_mcdEst <- function(x,
-                      h = .5, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
+                      h = .75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
                       alpha = .01,
                       na.rm = TRUE){
 
@@ -45,18 +53,17 @@ outliers_mcdEst <- function(x,
 
   #Distances from centroid for each matrix
   dist <- mahalanobis(data,output$center,output$cov) # distance
+
   #Detecting outliers
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],
+  coordinates <- cbind(x_axis = data[,1][dist > cutoff],
                       y_axis = data[,2][dist > cutoff])
-  outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
-  if (length(names_outliers) != 0){rownames(outliers) <- paste("POS",names_outliers)}
 
   # print results
-    meth <- "Minimum Covariance Determinant estimator"
+  meth <- "Minimum Covariance Determinant estimator"
 
   # Return results in list()
-    invisible(list(MaxDist = cutoff, center = output$center,nbrow = names_outliers))
+    invisible(list(MaxDist = cutoff, center = output$center,outliers_pos = names_outliers,outliers_val=coordinates))
 
 }
 
@@ -67,7 +74,7 @@ outliers_mcd.default <- function(x,h = .5,alpha = .01,na.rm = TRUE){
   out$distance <- out$MaxDist
   out$center <- out$center
   out$call <- match.call()
-  out$nb <- c(total = length(out$nbrow))
+  out$nb <- c(total = length(out$outliers_pos))
 
   class(out) <- "outliers_mcd"
   out

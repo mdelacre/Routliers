@@ -12,11 +12,17 @@
 #' @keywords mahalanobis outliers
 #' @return Returns Call, Max distance, number of outliers
 #' @examples
-#' ## Run outliers_mahalanobis
+#' #### Run outliers_mahalanobis
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,22:46])
-#' res <- outliers_mahalanobis(x = cbind(SOC,HSC),na.rm = TRUE)
+#' HSC <- rowMeans(Attacks[,21:45])
+#' res <- outliers_mahalanobis(x = cbind(SOC,HSC), na.rm = TRUE)
+#' res
+#'
+#' # A list of elements can be extracted from the function, such as the position of outliers in the dataset
+#' # and the coordinates of outliers
+#' res$outliers_pos
+#' res$outliers_val
 #'
 #' @importFrom stats mahalanobis cov na.omit qchisq
 
@@ -44,15 +50,12 @@ outliers_mahalanobisEst <- function(x,
   names_outliers <- which(dist > cutoff)
   coordinates <- list(x_axis = data[,1][dist > cutoff],
                       y_axis = data[,2][dist > cutoff])
-  outliers <- cbind(x_axis = coordinates$x_axis,y_axis = coordinates$y_axis)
-  if (length(names_outliers) != 0){
-    rownames(outliers) <- paste("POS",names_outliers)}
 
   # print results
   meth <- "Mahalanobis distance"
 
   # Return results in list()
-  invisible(list(MaxDist = cutoff, nbrow = names_outliers))
+  invisible(list(MaxDist = cutoff, center = colMeans(data),outliers_pos = names_outliers,outliers_val=coordinates))
 
 }
 
@@ -62,7 +65,7 @@ outliers_mahalanobis.default <- function(x,alpha = .01,na.rm = TRUE){
   out <- outliers_mahalanobisEst(x,alpha,na.rm)
   out$distance <- out$MaxDist
   out$call <- match.call()
-  out$nb <- c(total = length(out$nbrow))
+  out$nb <- c(total = length(out$outliers_pos))
 
   class(out) <- "outliers_mahalanobis"
   out
