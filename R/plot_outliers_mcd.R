@@ -9,16 +9,31 @@
 #' @param h proportion of dataset to use in order to compute sample means and covariances
 #' @param alpha nominal type I error probability (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
+#' @param pos_display set whether the position of outliers in the dataset should be displayed on the graph (pos_display = TRUE)
+#' or not (posdisplay = FALSE)
 #'
 #' @export plot_outliers_mcd
 #' @keywords plot MMCD outliers
 #' @return None
 #' @examples
-#' ## Run plot_outliers_mcd
+#' #### Run plot_outliers_mcd
 #' data(Attacks)
-#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
+#' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
+#' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,21:45])
 #' plot_outliers_mcd(x = cbind(SOC,HSC),na.rm = TRUE)
+#'
+#' # it's also possible to display the position of the multivariate outliers ion the graph
+#' # preferably, when the number of multivariate outliers is not too high
+#' c1 <- c(1,4,3,6,5,2,1,3,2,4,7,3,6,3,4,6)
+#' c2 <- c(1,3,4,6,5,7,1,4,3,7,50,8,8,15,10,6)
+#' plot_outliers_mcd(x=cbind(c1,c2),pos_display=TRUE)
+#'
+#' # When no outliers are detected, only one regression line is displayed
+#' c1 <- c(1,4,3,6,5)
+#' c2 <- c(1,3,4,6,5)
+#' plot_outliers_mcd(x=cbind(c1,c2),pos_display=TRUE)
+#'
 #' @importFrom stats mahalanobis lm na.omit qchisq
 #' @importFrom MASS cov.mcd
 #' @importFrom graphics abline legend par points
@@ -26,7 +41,8 @@
 plot_outliers_mcd <- function(x,
                               h = .75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
                               alpha = .01,
-                              na.rm = TRUE){
+                              na.rm = TRUE,
+                              pos_display=FALSE){
 
   if (na.rm == TRUE) {
     data <- na.omit(x)
@@ -70,7 +86,9 @@ plot_outliers_mcd <- function(x,
       legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
-             legend = "Regression line",
+             legend = paste0("Regression line: y = ",
+                             round(lm(data[,2]~data[,1])$coefficients[1],3),
+                             sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
              fill = "darkviolet",
              box.lty = 0)
     } else if (length(names_outliers) == 1){
@@ -81,26 +99,26 @@ plot_outliers_mcd <- function(x,
              pch = 19,
              cex = .5)
 
+      if (pos_display==TRUE){
       text(data[names_outliers,][1],
            data[names_outliers,][2],
            as.character(names_outliers),
-           pos = 4,
+           pos = 1,
            cex = .75,
-           col = "red")
+           col = "red")}
 
       if(lm(data[,2]~data[,1])$coefficients[2] > 0){
         sign="+"
-      } else {sign=NULL}
+      } else {sign=""}
 
       if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
         sign2="+"
-      } else {sign2=NULL}
+      } else {sign2=""}
 
             legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
-             legend = c(
-               paste0("Regression line including all data: y = ",
+             legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),
                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
                               paste0("Regression line without detected outliers: y = ",
@@ -117,22 +135,32 @@ plot_outliers_mcd <- function(x,
              pch = 19,
              cex = .5)
 
-      text(data[names_outliers,][,1],
-           data[names_outliers,][,2],
-           as.character(names_outliers),
-           pos = 4,
-           cex = .75,
-           col = "red")
+      if (pos_display==TRUE){
+        for (i in seq_len(length(names_outliers))){
+        text(data[names_outliers,][i,1],
+             data[names_outliers,][i,2],
+             as.character(names_outliers[i]),
+             pos = 1,
+             cex = .75,
+             col = "red")}}
+
+if(lm(data[,2]~data[,1])$coefficients[2] > 0){
+  sign="+"
+} else {sign=""}
+
+if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
+  sign2="+"
+} else {sign2=""}
 
       legend(x = "top",
              xjust = "centered",
              inset = c(0,-.2),
              legend = c(paste0("Regression line including all data: y = ",
-                               round(lm(data[,2]~data[,1])$coefficients[1],3),
-                               sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"X"),
-                        paste0("Regression line without detected outliers: y = ",
-                               round(mod$coefficients[1],3),sign2,
-                               round(mod$coefficients[2],3),"X")),
+                      round(lm(data[,2]~data[,1])$coefficients[1],3),
+                      sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+                              paste0("Regression line without detected outliers: y = ",
+                                     round(mod$coefficients[1],3),sign2,
+                                     round(mod$coefficients[2],3),"x")),
              fill = c("darkviolet","darkgreen"),
              box.lty = 0)}
 
