@@ -6,7 +6,7 @@
 #'
 #' @docType data
 #'
-#' @usage ls(Intention)
+#' @usage data(Intention)
 #'
 #' @format
 #' \describe{
@@ -40,8 +40,8 @@
 #'   Intention$Total_Amount_Earned_if.forced.to.pay.for.cue= Intention$Total_Amount_Earned - 0.03}
 #' }
 #'
-#' @source \href{https://github.com/mdelacre/Routliers/blob/master/data/Intention.RData}
 #'
 #' @keywords Reminder, Intention
 #'
+#' @importFrom stats mahalanobis lm na.omit qchisq
 "Intention"
