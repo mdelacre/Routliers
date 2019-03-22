@@ -89,17 +89,17 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   na.rm = as.logical(na.rm)
 
   out <- outliers_madEst(x,b,threshold,na.rm)
-  out2 <- NULL
-  out2$call <- match.call()
-  out2$median <- out$Median
-  out2$MAD <- out$MAD
-  out2$limits <- as.vector(c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD))
-  out2$nb <- c("extremely low" = length(out$L_outliers),
+  out <- NULL
+  out$call <- match.call()
+  out$median <- out$Median
+  out$MAD <- out$MAD
+  out$limits <- as.vector(c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD))
+  out$nb <- c("extremely low" = length(out$L_outliers),
               "extremely high" = length(out$U_outliers),
               total = length(out$outliers))
 
-  class(out2) <- "outliers_mad"
-  out2
+  class(out) <- "outliers_mad"
+  out
   }
 
 print.outliers_mad <- function(x,...){
