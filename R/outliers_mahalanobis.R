@@ -78,7 +78,7 @@ print.outliers_mahalanobis <- function(x){
   cat("Call:\n")
   print(x$call)
 
-  cat("\nLimit distance of acceptable values from the centroïd :\n")
+  cat("\nLimit distance of acceptable values from the centroid :\n")
   print(x$distance)
 
   cat("\nNumber of detected outliers:\n")
