@@ -102,7 +102,7 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   out2
   }
 
-print.outliers_mad <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
+print.outliers_mad <- function(x,...){
   cat("Call:\n")
   print(x$call)
 

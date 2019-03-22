@@ -75,7 +75,7 @@ outliers_mahalanobis.default <- function(x,alpha = .01,na.rm = TRUE){
 }
 
 
-print.outliers_mahalanobis <- function(x){
+print.outliers_mahalanobis <- function(x,...){
   cat("Call:\n")
   print(x$call)
 

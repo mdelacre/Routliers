@@ -84,7 +84,7 @@ outliers_mcd.default <- function(x,h = .5,alpha = .01,na.rm = TRUE){
   out
 }
 
-print.outliers_mcd <- function(x){
+print.outliers_mcd <- function(x,...){
   cat("Call:\n")
   print(x$call)
 
