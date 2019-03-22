@@ -2,10 +2,12 @@ Package: Routliers
 Title: Robust outliers detection
 Version: 0.0.0.9000
 URL: https://github.com/mdelacre/Routliers
-Author: Marie Delacre Olivier Klein
+Authors@R: c(
+    person("Marie", "Delacre", email = "marie.delacre@ulb.ac.be", role = "cre"),
+    person("Olivier", "Klein", email = "Klein.Olivier@ulb.ac.be", role = "aut"))
 Maintainer: Marie Delacre <marie.delacre@ulb.ac.be>
-Description: Detecting outliers using robust methods:the MAD for univariate outliers; MMCD for multivariate outliers (there is also the more known but less robust mahalanobis distance method)
-Depends: R (>= 3.4.2)
+Description: Detecting outliers using robust methods, i.e. the MAD for univariate outliers and MMCD for multivariate outliers.There is also the more known but less robust mahalanobis distance method, only for comparison purposes.
+Depends: R (>= 3.4.0)
 Imports:
     MASS,
     stats,
