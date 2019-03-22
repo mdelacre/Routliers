@@ -8,7 +8,9 @@
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'
 #' @export outliers_mcd
-#' @export outliers_mcd.default
+#' @S3method outliers_mcd default
+#' @S3method print outliers_mcd
+#'
 #' @keywords MMCD outliers
 #' @return Returns Call, Max distance, number of outliers
 #' @examples

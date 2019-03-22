@@ -11,7 +11,9 @@
 #' - defaults to TRUE
 #'
 #' @export outliers_mad
-#' @export outliers_mad.default
+#' @S3method outliers_mad default
+#' @S3method print outliers_mad
+#'
 #' @keywords MAD outliers
 #' @return Returns Call, median, MAD, limits of acceptable range of values, number of outliers
 #' @examples

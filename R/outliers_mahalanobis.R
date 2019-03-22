@@ -7,7 +7,8 @@
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'
 #' @export outliers_mahalanobis
-#' @export outliers_mahalanobis.default
+#' @S3method outliers_mahalanobis default
+#' @S3method print outliers_mahalanobis
 #'
 #' @keywords mahalanobis outliers
 #' @return Returns Call, Max distance, number of outliers
