@@ -14,11 +14,10 @@
 #'
 #' @usage data(Attacks)
 #'
-#' @format A data frame with 2077 rows and 46 variables:
+#' @format A data frame with 2077 rows and 45 variables:
 #' \describe{
 #'   \item{age}{age of participants, in years}
-#'   \item{genre}{gender}
-#'   \item{presencebxl}{participants were they in Brussels during the Attacks? -1 if no, 1 if yes}
+#'   \item{genre}{participant gender, 1 = female; -1 = male}
 #'   \item{soc1}{Vous avez le sentiment que vous ne vous souciez pas reellement de ce qui se passe autour de vous: 1 = Tres rarement ou rarement; 7 = Souvent}
 #'   \item{soc1r}{item1 reversed}
 #'   \item{soc2}{Vous est-il arrive dans le passe d etre surpris(e) par le comportement de gens que vous pensiez connaitre tres bien ?: 1 = Jamais; 7 = Toujours}
@@ -64,9 +63,7 @@
 #'   \item{hsc25}{Sentiment d etre inutile}
 #' }
 #'
-#' @source
-#' \href{https://github.com/mdelacre/Routliers/blob/master/data/Attacks.RData}
-#'
 #' @keywords Brussels Attacks Anxiety Depression Coherence
-
+#'
+#' @importFrom stats mahalanobis lm na.omit qchisq
 "Attacks"
