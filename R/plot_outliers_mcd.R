@@ -100,8 +100,8 @@ plot_outliers_mcd <- function(x,
              data[names_outliers,][2],
              col = "red",
              bg = "red",
-             pch = 19,
-             cex = .5)
+             pch = 15,
+             cex = .6)
 
       if (pos_display==TRUE){
       text(data[names_outliers,][1],
@@ -136,8 +136,8 @@ plot_outliers_mcd <- function(x,
              data[names_outliers,][,2],
              col = "red",
              bg = "red",
-             pch = 19,
-             cex = .5)
+             pch = 15,
+             cex = .6)
 
       if (pos_display==TRUE){
         for (i in seq_len(length(names_outliers))){
