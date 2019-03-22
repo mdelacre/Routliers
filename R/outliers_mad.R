@@ -89,7 +89,6 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
   na.rm = as.logical(na.rm)
 
   out <- outliers_madEst(x,b,threshold,na.rm)
-  out <- NULL
   out$call <- match.call()
   out$median <- out$Median
   out$MAD <- out$MAD
