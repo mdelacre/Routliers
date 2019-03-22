@@ -25,8 +25,6 @@
 #'   \item{mean_judge_r}{average of all scenarios judgment}
 #' }
 #'
-#' @source \href{https://github.com/mdelacre/Routliers/blob/master/data/Morality.RData}
-#'
 #' @keywords Brussels Attacks Anxiety Depression Coherence
 #'
 #'@importFrom stats mahalanobis lm na.omit qchisq
