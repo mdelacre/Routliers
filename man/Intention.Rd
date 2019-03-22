@@ -34,11 +34,8 @@
   \item{Total_Amount_Earned_if.forced.to.pay.for.cue}{equals Intention$Total_Amount_Earned in all but one condition: in condition 1 (free-reminder-through-association condition):
   Intention$Total_Amount_Earned_if.forced.to.pay.for.cue= Intention$Total_Amount_Earned - 0.03}
 }}
-\source{
-\href{https://github.com/mdelacre/Routliers/blob/master/data/Intention.RData}
-}
 \usage{
-ls(Intention)
+data(Intention)
 }
 \description{
 Participants have to answer to many questions (in a 11-page-survey). For 5 questions (indicated by $$ at the beginning of the question), they are told that there is a correct answer and that they will earn $0.06 if they provide this correct answer.

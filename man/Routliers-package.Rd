@@ -6,13 +6,22 @@
 \alias{Routliers-package}
 \title{Routliers: Robust outliers detection}
 \description{
-Detecting outliers using robust methods:the MAD for univariate outliers; MMCD for multivariate outliers (there is also the more known but less robust mahalanobis distance method)
+Detecting outliers using robust methods, i.e. the MAD for univariate outliers and MMCD for multivariate outliers.There is also the more known but less robust mahalanobis distance method, only for comparison purposes.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/mdelacre/Routliers}
   \item Report bugs at \url{https://github.com/mdelacre/Routliers/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Marie Delacre \email{marie.delacre@ulb.ac.be}
+
+Authors:
+\itemize{
+  \item Olivier Klein \email{Klein.Olivier@ulb.ac.be}
 }
 
 }

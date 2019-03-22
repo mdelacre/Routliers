@@ -5,11 +5,10 @@
 \alias{Attacks}
 \title{Data collected the day after the the terrorist attacks in Brussels (on the morning of 22 March 2016) assessing the Sense of Coherence (SOC-13 self report questionnaire; Antonovsky, 1987),
 anxiety and depression symptoms (HSCL-25; Derogatis et al., 1974) of 2077 subjects (1056 were in Brussels during the Brussels attacks, 1021 were not)}
-\format{A data frame with 2077 rows and 46 variables:
+\format{A data frame with 2077 rows and 45 variables:
 \describe{
   \item{age}{age of participants, in years}
-  \item{genre}{gender}
-  \item{presencebxl}{participants were they in Brussels during the Attacks? -1 if no, 1 if yes}
+  \item{genre}{participant gender, 1 = female; -1 = male}
   \item{soc1}{Vous avez le sentiment que vous ne vous souciez pas reellement de ce qui se passe autour de vous: 1 = Tres rarement ou rarement; 7 = Souvent}
   \item{soc1r}{item1 reversed}
   \item{soc2}{Vous est-il arrive dans le passe d etre surpris(e) par le comportement de gens que vous pensiez connaitre tres bien ?: 1 = Jamais; 7 = Toujours}
@@ -54,9 +53,6 @@ anxiety and depression symptoms (HSCL-25; Derogatis et al., 1974) of 2077 subjec
   \item{hsc24}{Sentiment que tout est fatiguant}
   \item{hsc25}{Sentiment d etre inutile}
 }}
-\source{
-\href{https://github.com/mdelacre/Routliers/blob/master/data/Attacks.RData}
-}
 \usage{
 data(Attacks)
 }

@@ -7,7 +7,7 @@
 Study 2}
 \format{a data frame with 145 rows and 10 columns
 \describe{
-  \item{number}{partcipant id}
+  \item{number}{participant id}
   \item{Orig_rep}{Is participant English or Serbian?}
   \item{social_distance}{Is the person in the scenario someone participants know (i.e. colleague, neighbor) ?}
   \item{swing_r}{A girl pushing another kid off a swing because she really wants to use it before going home}
@@ -18,9 +18,6 @@ Study 2}
   \item{dog_r}{Eating our dog that was  hitten  by  a  car  in  front  of  our  house  and  was  killed}
   \item{mean_judge_r}{average of all scenarios judgment}
 }}
-\source{
-\href{https://github.com/mdelacre/Routliers/blob/master/data/Morality.RData}
-}
 \usage{
 data(Morality)
 }
