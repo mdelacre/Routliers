@@ -3,11 +3,12 @@
 \docType{data}
 \name{Attacks}
 \alias{Attacks}
-\title{Data collected the day after the the terrorist attacks in Brussels (on the morning of 22 March 2016) assessing the Sense of Coherence (SOC-13 self report questionnaire; Antonovsky, 1987),
-anxiety and depression symptoms (HSCL-25; Derogatis et al., 1974) of 2077 subjects (1056 were in Brussels during the Brussels attacks, 1021 were not)}
-\format{A data frame with 2077 rows and 45 variables:
+\title{Data collected the day after the terrorist attacks in Brussels (on the morning of 22 March 2016) assessing the Sense of Coherence,
+anxiety and depression symptoms of 2077 subjects (1056 were in Brussels during the terrorist attacks, and 1021 were not).}
+\format{A data frame with 2077 rows and 46 variables:
 \describe{
   \item{age}{age of participants, in years}
+  \item{presencebxl}{were participants present in Brussels during the terrorist attacks; 1 = yes; -1 = no}
   \item{genre}{participant gender, 1 = female; -1 = male}
   \item{soc1}{Vous avez le sentiment que vous ne vous souciez pas reellement de ce qui se passe autour de vous: 1 = Tres rarement ou rarement; 7 = Souvent}
   \item{soc1r}{item1 reversed}

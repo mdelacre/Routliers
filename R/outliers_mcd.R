@@ -21,7 +21,7 @@
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6","soc7r",
 #' "soc8","soc9","soc10r","soc11","soc12","soc13")])
-#' HSC <- rowMeans(Attacks[,21:45])
+#' HSC <- rowMeans(Attacks[,22:46])
 #' res <- outliers_mcd(x = cbind(SOC,HSC), h = .5,na.rm = TRUE)
 #' res
 #'
