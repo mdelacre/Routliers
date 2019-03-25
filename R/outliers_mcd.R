@@ -37,7 +37,8 @@
 outliers_mcd <- function(x,h,alpha,na.rm) UseMethod("outliers_mcd")
 
 outliers_mcdEst <- function(x,
-                      h = .75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
+                      h = .75, # fraction of data we wanna keep
+                               # to compute the MCD (between 0 and 1)
                       alpha = .01,
                       na.rm = TRUE){
 
@@ -46,7 +47,8 @@ outliers_mcdEst <- function(x,
   } else {data <- x}
 
   for (i in seq_len(ncol(data))){
-    if(inherits(data[,i],c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+    if(inherits(data[,i],c("numeric","integer")) == FALSE)
+      stop("Data are neither numeric nor integer")
   }
 
   #Creating covariance matrix for Minimum Covariance Determinant
@@ -67,7 +69,12 @@ outliers_mcdEst <- function(x,
   meth <- "Minimum Covariance Determinant estimator"
 
   # Return results in list()
-    invisible(list(MaxDist = cutoff, center = output$center,outliers_pos = names_outliers,outliers_val=coordinates))
+    invisible(
+      list(MaxDist = cutoff,
+           center = output$center,
+           outliers_pos = names_outliers,
+           outliers_val=coordinates)
+      )
 
 }
 

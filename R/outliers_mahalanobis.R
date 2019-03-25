@@ -30,7 +30,8 @@
 #' @importFrom stats mahalanobis cov na.omit qchisq
 
 # Create a generic function
-outliers_mahalanobis <- function(x,alpha,na.rm) UseMethod("outliers_mahalanobis")
+outliers_mahalanobis <- function(x,alpha,na.rm)
+  UseMethod("outliers_mahalanobis")
 
 outliers_mahalanobisEst <- function(x,
                                     alpha = .01,
@@ -58,7 +59,12 @@ outliers_mahalanobisEst <- function(x,
   meth <- "Mahalanobis distance"
 
   # Return results in list()
-  invisible(list(MaxDist = cutoff, center = colMeans(data),outliers_pos = names_outliers,outliers_val=coordinates))
+  invisible(
+    list(MaxDist = cutoff,
+         center = colMeans(data),
+         outliers_pos = names_outliers,
+         outliers_val=coordinates)
+    )
 
 }
 

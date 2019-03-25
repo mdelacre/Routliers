@@ -62,7 +62,8 @@ plot_outliers_mad <- function(x,
   # plotting results
   par(mar = c(5.1,3.1,5.1,1.1))
   plot(NA,
-       xlim = c(min(min(data),LL_CI_MAD)-.1*(max(data)-min(data)),max(max(data),UL_CI_MAD)+.1*(max(data)-min(data))),
+       xlim = c(min(min(data),LL_CI_MAD)-.1*(max(data)-min(data)),
+                max(max(data),UL_CI_MAD)+.1*(max(data)-min(data))),
        ylim = c(0,1),
        bty = "n",
        yaxt = "n",
@@ -70,7 +71,11 @@ plot_outliers_mad <- function(x,
        xlab = ""
        )
 
-  rect(LL_CI_MAD,.25,UL_CI_MAD,.45,col = "lightgrey", border = "lightgrey", lwd = par("lwd"))
+  rect(LL_CI_MAD,.25,
+       UL_CI_MAD,.45,
+       col = "lightgrey",
+       border = "lightgrey",
+       lwd = par("lwd"))
 
   if(LL_CI_MAD != UL_CI_MAD){
     segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd = 1)
@@ -81,14 +86,24 @@ plot_outliers_mad <- function(x,
     text(center,.45,"median",lwd = 1,pos = 3,cex = .75,col = "red")
   } else if (LL_CI_MAD == UL_CI_MAD){
     segments(LL_CI_MAD,0.25,LL_CI_MAD,0.45, lwd = 1)
-    text(LL_CI_MAD,.45,paste0("lower = upper","\n","CI limit"),lwd = 1,pos = 3,cex = .75)
+    text(LL_CI_MAD,
+         .45,
+         paste0("lower = upper","\n","CI limit"),
+         lwd = 1,
+         pos = 3,
+         cex = .75)
   }
   if (length(outliers) != 0){
-    points(data[outliers_pos],rep(.35,length(outliers_pos)),col = "red",bg = "red",pch = 19,cex = .5)}
+    points(data[outliers_pos],
+           rep(.35,length(outliers_pos)),
+           col = "red",bg = "red",
+           pch = 19,cex = .5)}
 
   title(
-    main = paste("Detecting values out of the Confidence Interval \n CI = Median",
-                 "\u00B1",threshold," MAD")
+    main = paste(
+      "Detecting values out of the Confidence Interval \n CI = Median",
+                 "\u00B1",threshold," MAD"
+      )
     )
 
   if(length(data[outliers_pos]) == 0){comment <- "No outliers are detected"

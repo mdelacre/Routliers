@@ -39,7 +39,8 @@
 #' @importFrom graphics abline legend par points plot
 
 plot_outliers_mcd <- function(x,
-                              h = .75, # fraction of data we wanna keep to compute the MCD (between 0 and 1)
+                              h = .75, # fraction of data we wanna keep
+                                       # to compute the MCD (between 0 and 1)
                               alpha = .01,
                               na.rm = TRUE,
                               pos_display=FALSE){
@@ -49,7 +50,8 @@ plot_outliers_mcd <- function(x,
   } else {data <- x}
 
   for (i in seq_len(ncol(data))){
-    if(inherits(data[,i],c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+    if(inherits(data[,i],c("numeric","integer")) == FALSE)
+      stop("Data are neither numeric nor integer")
   }
 
   #Creating covariance matrix for Minimum Covariance Determinant
@@ -78,8 +80,10 @@ plot_outliers_mcd <- function(x,
   abline(lm(data[,2]~data[,1]),col = "darkviolet")
   # if there are outliers, compute the regression line excluding it
   if (length(names_outliers) > 0){
-      dat2 <- data[-names_outliers,]    # matrix without outliers (IF there are outliers)
-      mod <- lm(dat2[,2]~dat2[,1])      # regression line computed without outliers
+      # matrix without outliers (IF there are outliers):
+      dat2 <- data[-names_outliers,]
+      # regression line computed without outliers:
+      mod <- lm(dat2[,2]~dat2[,1])
       abline(mod,col = "darkgreen")}
     par(xpd = TRUE,mar = c(2,2,4,2))
     if (length(names_outliers) == 0){
@@ -92,7 +96,10 @@ plot_outliers_mcd <- function(x,
              inset = c(0,-.2),
              legend = paste0("Regression line: y = ",
                              round(lm(data[,2]~data[,1])$coefficients[1],3),
-                             sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+                             sign,
+                             round(lm(data[,2]~data[,1])$coefficients[2],3),
+                             "x"
+                             ),
              fill = "darkviolet",
              box.lty = 0)
     } else if (length(names_outliers) == 1){
@@ -125,7 +132,8 @@ plot_outliers_mcd <- function(x,
              legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),
                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers: y = ",
+                              paste0("Regression line without detected outliers:
+                                     y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
                               fill = c("darkviolet","darkgreen"),
@@ -162,7 +170,8 @@ if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
              legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),
                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers: y = ",
+                              paste0("Regression line without detected outliers:
+                                     y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
              fill = c("darkviolet","darkgreen"),

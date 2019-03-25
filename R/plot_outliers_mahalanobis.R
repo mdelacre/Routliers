@@ -57,7 +57,10 @@ plot_outliers_mahalanobis <- function(x,
   #Detecting outliers
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],y_axis = data[,2][dist > cutoff])
+  coordinates <- list(
+    x_axis = data[,1][dist > cutoff],
+    y_axis = data[,2][dist > cutoff]
+    )
 
   # plotting results
   par(xpd = FALSE)
@@ -68,8 +71,10 @@ plot_outliers_mahalanobis <- function(x,
   abline(lm(data[,2]~data[,1]),col = "darkviolet")
   # if there are outliers, compute the regression line excluding it
   if (length(names_outliers) > 0){
-    dat2 <- data[-names_outliers,]           # matrix without outliers (IF there are outliers)
-    mod <- lm(dat2[,2]~dat2[,1])              # regression line computed without outliers
+    # matrix without outliers (IF there are outliers):
+    dat2 <- data[-names_outliers,]
+    # regression line computed without outliers:
+    mod <- lm(dat2[,2]~dat2[,1])
     abline(mod,col = "darkgreen")}
   par(xpd = TRUE,mar = c(2,2,4,2))
   if (length(names_outliers) == 0){
@@ -115,7 +120,8 @@ plot_outliers_mahalanobis <- function(x,
              legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),
                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers: y = ",
+                              paste0("Regression line without detected outliers:
+                                     y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
              fill = c("darkviolet","darkgreen"),
@@ -149,9 +155,10 @@ plot_outliers_mahalanobis <- function(x,
               xjust = "centered",
               inset = c(0,-.2),
              legend = c(paste0("Regression line including all data: y = ",
-                      round(lm(data[,2]~data[,1])$coefficients[1],3),
-                      sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers: y = ",
+                      round(lm(data[,2]~data[,1])$coefficients[1],3),sign,
+                      round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
+                              paste0("Regression line without detected outliers:
+                                     y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
               fill = c("darkviolet","darkgreen"),

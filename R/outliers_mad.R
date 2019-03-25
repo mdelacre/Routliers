@@ -47,17 +47,23 @@ outliers_madEst <- function(x,
                             threshold = 3,
                             na.rm = TRUE){
 
-  # If data are numeric or integer, applying the function. Otherwise, stopping it.
-  if(inherits(x,c("numeric","integer")) == FALSE) stop("Data are neither numeric nor integer")
+  # If data are numeric or integer, applying the function.
+  # Otherwise, stopping it.
+  if(inherits(x,c("numeric","integer")) == FALSE)
+    stop("Data are neither numeric nor integer")
 
   if (na.rm == TRUE) {
     data <- na.omit(x)   # incomplete cases are removed
   } else {data <- x}
 
   # Calculate the MAD
-  center <- median(data) # computing the median of the data (i.e the center of the CI defining acceptable values)
-  MAD <- b*median(abs(data-center)) # computing the median of data centered around the sample median
-  half_CI <- threshold*MAD # how many MAD from the median are the limits of the IC?
+  # computing the median of the data
+  # median = the center of the CI defining acceptable values
+  center <- median(data)
+  # computing the median of data centered around the sample median
+  MAD <- b*median(abs(data-center))
+  # how many MAD from the median are the limits of the IC?
+  half_CI <- threshold*MAD
 
   # Calculate the range of acceptable values
   LL_CI_MAD <- center-half_CI # lower limit of the median CI
@@ -74,7 +80,8 @@ outliers_madEst <- function(x,
                   UL_CI_MAD = UL_CI_MAD,
                   L_outliers = sort(data[data < LL_CI_MAD]),
                   U_outliers = sort(data[data > UL_CI_MAD]),
-                  outliers = sort(c(data[data < LL_CI_MAD],data[data > UL_CI_MAD]))))
+                  outliers = sort(c(data[data < LL_CI_MAD],
+                                    data[data > UL_CI_MAD]))))
 
 }
 
