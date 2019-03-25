@@ -83,10 +83,10 @@ outliers_madEst <- function(x,
 
 outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
 
-  x = as.numeric(x)
-  b = as.numeric(b)
-  threshold = as.numeric(threshold)
-  na.rm = as.logical(na.rm)
+  x <- as.numeric(x)
+  b <- as.numeric(b)
+  threshold <- as.numeric(threshold)
+  na.rm <- as.logical(na.rm)
 
   out <- outliers_madEst(x,b,threshold,na.rm)
   out$call <- match.call()

@@ -84,8 +84,8 @@ plot_outliers_mcd <- function(x,
     par(xpd = TRUE,mar = c(2,2,4,2))
     if (length(names_outliers) == 0){
       if(lm(data[,2]~data[,1])$coefficients[2] > 0){
-        sign="+"
-      } else {sign=""}
+        sign <- "+"
+      } else {sign <- ""}
 
       legend(x = "top",
              xjust = "centered",
@@ -112,12 +112,12 @@ plot_outliers_mcd <- function(x,
            col = "red")}
 
       if(lm(data[,2]~data[,1])$coefficients[2] > 0){
-        sign="+"
-      } else {sign=""}
+        sign <- "+"
+      } else {sign <- ""}
 
       if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
-        sign2="+"
-      } else {sign2=""}
+        sign2 <- "+"
+      } else {sign2 <- ""}
 
             legend(x = "top",
              xjust = "centered",
@@ -149,12 +149,12 @@ plot_outliers_mcd <- function(x,
              col = "red")}}
 
 if(lm(data[,2]~data[,1])$coefficients[2] > 0){
-  sign="+"
-} else {sign=""}
+  sign <- "+"
+} else {sign <- ""}
 
 if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
-  sign2="+"
-} else {sign2=""}
+  sign2 <- "+"
+} else {sign2 <- ""}
 
       legend(x = "top",
              xjust = "centered",
