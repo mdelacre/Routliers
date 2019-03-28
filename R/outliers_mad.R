@@ -111,7 +111,7 @@ outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
 print.outliers_mad <- function(x,...){
 
   if(inherits(x,c("numeric","integer")) == FALSE){
-    print("Data is neither numeric nor integer")
+    print("x is neither numeric nor integer")
   } else {
 
   cat("Call:\n")

@@ -40,7 +40,7 @@ plot_outliers_mad <- function(x,
                               na.rm = TRUE){
 
   if(inherits(x,c("numeric","integer")) == FALSE)
-    stop("Data are neither numeric nor integer")
+    stop("x is neither numeric nor integer")
 
   if (na.rm == TRUE) {
     data <- na.omit(x)
@@ -61,6 +61,11 @@ plot_outliers_mad <- function(x,
 
   # plotting results
   par(mar = c(5.1,3.1,5.1,1.1))
+
+  if(inherits(x,c("numeric","integer")) == FALSE){
+    print("x is neither numeric nor integer")
+  } else {
+
   plot(NA,
        xlim = c(min(min(data),LL_CI_MAD)-.1*(max(data)-min(data)),
                 max(max(data),UL_CI_MAD)+.1*(max(data)-min(data))),
@@ -110,6 +115,6 @@ plot_outliers_mad <- function(x,
   } else {comment <- paste(length(outliers),"outliers are detected")}
 
   legend("top",comment,pch = 1,col = "white",cex = 1,bty = "n")
+   }
 }
-
 
