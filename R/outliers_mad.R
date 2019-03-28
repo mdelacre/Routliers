@@ -36,7 +36,11 @@
 #' "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' res=outliers_mad(x = SOC)
 #'
+#' ### Finally, results can be plotted in order to visualize outliers
+#' plot(res,SOC)
+#'
 #' @importFrom stats na.omit median
+#' @importFrom graphics par points rect segments text title plot
 
 # Create a generic function
 outliers_mad <- function(x,b,threshold,na.rm) UseMethod("outliers_mad")
@@ -74,9 +78,7 @@ outliers_madEst <- function(x,
   outliers_pos <- c(which(data < LL_CI_MAD),which(data > UL_CI_MAD))
 
   # Return results in list()
-   invisible(list(Min=Min,
-                  Max=Max,
-                  Median = center,
+   invisible(list(Median = center,
                   MAD = MAD,
                   LL_CI_MAD = LL_CI_MAD,
                   UL_CI_MAD = UL_CI_MAD,
@@ -136,11 +138,9 @@ plot.outliers_mad <- function(res,x){
   if(inherits(x,c("numeric","integer")) == FALSE)
     stop("x is neither numeric nor integer")
 
-  if (na.rm == TRUE) {
     data <- na.omit(x)   # incomplete cases are removed
-  } else {data <- x}
 
-  plot(NA,
+    plot(NA,
        xlim = c(min(min(data),res$LL_CI_MAD)-.1*(max(data)-min(data)),
                 max(max(data),res$UL_CI_MAD)+.1*(max(data)-min(data))),
        ylim = c(0,1),
