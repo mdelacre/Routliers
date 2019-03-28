@@ -11,6 +11,8 @@
 #' - defaults to TRUE
 #'
 #' @export outliers_mad
+#' @export plot_outliers_mad
+#'
 #' @S3method outliers_mad default
 #' @S3method print outliers_mad
 #'
@@ -29,7 +31,6 @@
 #' # such as all the extremely high values,
 #' # That will be sorted in ascending order
 #  res1$U_outliers
-#'
 #' #### The function should be performed on dimension rather than on isolated items
 #' data(Attacks)
 #' SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
@@ -37,7 +38,7 @@
 #' res=outliers_mad(x = SOC)
 #'
 #' ### Finally, results can be plotted in order to visualize outliers
-#' plot(res,SOC)
+#' plot_outliers_mad(res,SOC)
 #'
 #' @importFrom stats na.omit median
 #' @importFrom graphics par points rect segments text title plot
@@ -131,7 +132,7 @@ print.outliers_mad <- function(x,...){
   print(x$nb)
 }
 
-plot.outliers_mad <- function(res,x){
+plot_outliers_mad <- function(res,x){
   # plotting results
   par(mar = c(5.1,3.1,5.1,1.1))
 
@@ -191,6 +192,4 @@ plot.outliers_mad <- function(res,x){
   legend("top",comment,pch = 1,col = "white",cex = 1,bty = "n")
 
 }
-
-
 
