@@ -43,6 +43,7 @@ SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
 "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 res=outliers_mad(x = SOC)
 
+
 }
 \keyword{MAD}
 \keyword{outliers}
