@@ -103,14 +103,13 @@ plot_outliers_mahalanobis <- function(res,
         sign2 <- "+"
       } else {sign2 <- ""}
 
+      par(xpd=TRUE)
       legend(x = "top",
              xjust = "centered",
-             inset = c(0,-.2),
              legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),
                       sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers:
-                                     y = ",
+                              paste0("Regression line without detected outliers: y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
              fill = c("darkviolet","darkgreen"),
@@ -146,8 +145,7 @@ plot_outliers_mahalanobis <- function(res,
              legend = c(paste0("Regression line including all data: y = ",
                       round(lm(data[,2]~data[,1])$coefficients[1],3),sign,
                       round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-                              paste0("Regression line without detected outliers:
-                                     y = ",
+                              paste0("Regression line without detected outliers: y = ",
                                      round(mod$coefficients[1],3),sign2,
                                      round(mod$coefficients[2],3),"x")),
               fill = c("darkviolet","darkgreen"),
