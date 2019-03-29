@@ -73,14 +73,15 @@ plot_outliers_mad <- function(res,x,pos_display=FALSE){
     points(data[res$outliers_pos],
            rep(.35,length(res$outliers_pos)),
            col = "red",bg = "red",
-           pch = 19,cex = .5)}
+           pch = 19,cex = .5)
 
-  if (pos_display==TRUE){
-
-    text(data[res$outliers_pos],.35,
-         as.character(res$outliers_pos),
-         col="red",lwd = 1,pos = 3,cex = .75)
+    if (pos_display == TRUE){
+      text(res$outliers,.35,
+           labels=as.character(res$outliers_pos),
+           col="red",lwd = 1,pos = 3,cex = .75)
+          }
     }
+
 
   title(
     main = paste(
