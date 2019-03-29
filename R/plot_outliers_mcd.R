@@ -38,7 +38,9 @@
 #' @importFrom MASS cov.mcd
 #' @importFrom graphics abline legend par points plot
 
-plot_outliers_mcd <- function(res,x,pos_display=FALSE){
+plot_outliers_mcd <- function(res,
+                              x,
+                              pos_display=FALSE){
 
   data <- x
   for (i in seq_len(ncol(data))){
