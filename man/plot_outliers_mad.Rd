@@ -4,18 +4,33 @@
 \alias{plot_outliers_mad}
 \title{Plotting function for the mad}
 \usage{
-plot_outliers_mad(res, x)
+plot_outliers_mad(res, x, pos_display = FALSE)
 }
 \arguments{
-\item{res}{vector of numeric values from which we want to compute outliers}
+\item{res}{result of the outliers_mad function from which we want to create a plot}
 
 \item{x}{data from which the outliers_mad function was performed}
+
+\item{pos_display}{set whether the position of outliers in the dataset should be displayed
+on the graph (pos_display = TRUE) or not (pos_display = FALSE)}
 }
 \value{
 None
 }
 \description{
-plotting data and highlighting univariate outliers detected with the MAD function
+plotting data and highlighting univariate outliers detected with the outliers_mad function
+}
+\examples{
+
+#### Run outliers_mad and perform plot_outliers_mad on the result
+data(Intention)
+res=outliers_mad(Intention$age)
+plot_outliers_mad(res,x=Intention$age)
+
+### when the number of outliers is small, one can display the outliers position in the dataset
+x=c(rnorm(10),3)
+res2=outliers_mad(x)
+plot_outliers_mad(res2,x,pos_display=TRUE)
 }
 \keyword{MAD}
 \keyword{outliers}

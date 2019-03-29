@@ -103,5 +103,3 @@ print.outliers_mcd <- function(x,...){
 
 }
 
-
-

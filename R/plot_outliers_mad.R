@@ -2,10 +2,10 @@
 #'
 #' plotting data and highlighting univariate outliers detected with the outliers_mad function
 #'
-#' @param res vector of numeric values from which we want to compute outliers
+#' @param res result of the outliers_mad function from which we want to create a plot
 #' @param x data from which the outliers_mad function was performed
 #' @param pos_display set whether the position of outliers in the dataset should be displayed
-#' on the graph (pos_display = TRUE) or not (posdisplay = FALSE)
+#' on the graph (pos_display = TRUE) or not (pos_display = FALSE)
 #'
 #' @export plot_outliers_mad
 #' @keywords plot MAD outliers
