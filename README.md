@@ -54,66 +54,68 @@ The MAD function is applied on the averaged scores.
 ``` r
 data(Attacks)
 anxiety <- rowMeans(Attacks[,c("hsc1","hsc2","hsc3","hsc4","hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")])
-outliers_mad(anxiety)
-#> Results:
-#> Median: 1.700
-#> MAD: 0.593
+res1 <- outliers_mad(x = anxiety)
+res1
+#> Call:
+#> outliers_mad.default(x = anxiety)
 #> 
-#> Acceptable range of values:
-#> lower MAD limit: -0.0791 
-#> upper MAD limit: 3.4791
+#> Median:
+#> [1] 1.7
 #> 
-#> Outliers:
+#> MAD:
+#> [1] 0.59304
 #> 
-#> extremely small values: 
-#> positions:  
-#> values: 
+#> Limits of acceptable range of values:
+#> [1] -0.07912  3.47912
 #> 
-#> extremely high values: 
-#> positions: 96 120 194 821 852 934 1255 1337 1340 1345 1353 1482 1516 1603 1616 1623 1661 1772 1816 1922 1930 1931 1955 2016 2061 
-#> values: 3.7 3.6 3.7 3.6 3.5 3.5 3.5 4 3.6 3.6 3.9 3.6 3.5 3.5 3.5 3.5 3.7 3.6 3.8 3.6 3.7 3.7 3.5 3.5 3.5
+#> Number of detected outliers
+#>  extremely low extremely high          total 
+#>              0             25             25
 ```
 
 ``` r
 depression <- rowMeans(Attacks[,c("hsc11","hsc12","hsc13","hsc14","hsc15","hsc16","hsc17","hsc18","hsc19","hsc20","hsc21","hsc22","hsc23","hsc24","hsc25")])
-outliers_mad(depression)
-#> Results:
-#> Median: 1.733
-#> MAD: 0.593
+res2 <- outliers_mad(x = depression)
+res2
+#> Call:
+#> outliers_mad.default(x = depression)
 #> 
-#> Acceptable range of values:
-#> lower MAD limit: -0.0458 
-#> upper MAD limit: 3.5125
+#> Median:
+#> [1] 1.733333
 #> 
-#> Outliers:
+#> MAD:
+#> [1] 0.59304
 #> 
-#> extremely small values: 
-#> positions:  
-#> values: 
+#> Limits of acceptable range of values:
+#> [1] -0.04578667  3.51245333
 #> 
-#> extremely high values: 
-#> positions: 234 990 1006 1164 1272 1337 1353 1355 1357 1441 1447 1507 1513 1772 1794 1955 2039 
-#> values: 3.5333 3.5333 3.5333 3.8 3.6667 3.9333 3.8667 3.8 3.6 3.5333 3.6 3.6667 3.7333 3.7333 3.5333 3.6 3.6667
+#> Number of detected outliers
+#>  extremely low extremely high          total 
+#>              0             17             17
 ```
 
 Here is an example of detecting extremely surprising combination of
 scores of anxiety and depression, using the outliers\_mcd function.
 
 ``` r
-outliers_mcd(data.frame(anxiety,depression))
-#> Method: Minimum Covariance Determinant estimator
+resMCD <- outliers_mcd(x = data.frame(anxiety,depression))
+resMCD
+#> Call:
+#> outliers_mcd.default(x = data.frame(anxiety, depression))
 #> 
-#> Results:
-#> Max distance: 9.210
-#> Number of outliers: 214
-#> Outliers positions: 1 7 17 21 34 52 96 99 120 133 148 152 171 194 196 216 228 234 248 260 263 266 307 338 363 391 407 439 441 452 462 465 472 475 476 492 512 516 517 518 531 552 562 577 582 601 614 629 643 644 650 653 669 699 713 722 728 732 749 753 759 794 808 810 821 827 842 852 857 859 871 884 934 935 960 961 962 990 1001 1002 1006 1029 1033 1038 1040 1062 1068 1072 1081 1082 1100 1132 1136 1152 1164 1171 1172 1211 1219 1229 1236 1247 1255 1261 1272 1282 1296 1307 1311 1312 1328 1329 1337 1340 1345 1353 1355 1357 1361 1365 1366 1390 1412 1419 1422 1425 1426 1436 1441 1445 1447 1460 1470 1479 1481 1482 1507 1512 1513 1516 1518 1530 1541 1576 1586 1588 1594 1600 1603 1612 1614 1616 1619 1621 1623 1630 1640 1647 1649 1658 1661 1671 1675 1681 1682 1683 1719 1725 1739 1751 1761 1767 1771 1772 1791 1794 1809 1816 1823 1843 1848 1861 1873 1879 1882 1892 1903 1922 1930 1931 1944 1945 1951 1952 1955 1965 1969 1973 1976 1992 1995 1996 1997 2000 2011 2016 2039 2045 2047 2053 2056 2057 2061 2075
+#> Limit distance of acceptable values from the centroid :
+#> [1] 9.21034
+#> 
+#> Number of detected outliers:
+#> total 
+#>   230
 ```
 
 It is also possible to plot the outliers, using plot\_outliers\_mad and
 plot\_outliers\_mcd functions:
 
 ``` r
-plot_outliers_mad(depression)
+plot_outliers_mad(res2, x = depression) 
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
@@ -123,7 +125,7 @@ compare the regression line with and without outliers (showing if there
 is a strong impact of outliers on the regression line):
 
 ``` r
-plot_outliers_mcd(data.frame(anxiety,depression))
+plot_outliers_mcd(resMCD, x = data.frame(anxiety,depression))
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />

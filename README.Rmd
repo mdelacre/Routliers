@@ -47,29 +47,32 @@ Here is an example of detecting extreme level of anxiety and depression (based o
 ```{r warning = FALSE, message = FALSE}
 data(Attacks)
 anxiety <- rowMeans(Attacks[,c("hsc1","hsc2","hsc3","hsc4","hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")])
-outliers_mad(anxiety)
+res1 <- outliers_mad(x = anxiety)
+res1
 ```
 
 ```{r warning = FALSE, message = FALSE}
 depression <- rowMeans(Attacks[,c("hsc11","hsc12","hsc13","hsc14","hsc15","hsc16","hsc17","hsc18","hsc19","hsc20","hsc21","hsc22","hsc23","hsc24","hsc25")])
-outliers_mad(depression)
+res2 <- outliers_mad(x = depression)
+res2
 ```
 
 Here is an example of detecting extremely surprising combination of scores of anxiety and depression, using the outliers_mcd function. 
 
 ```{r warning = FALSE, message = FALSE}
-outliers_mcd(data.frame(anxiety,depression))
+resMCD <- outliers_mcd(x = data.frame(anxiety,depression))
+resMCD
 ```
 
 It is also possible to plot the outliers, using plot_outliers_mad and plot_outliers_mcd functions:
 
 ```{r warning = FALSE, message = FALSE}
-plot_outliers_mad(depression)
+plot_outliers_mad(res2, x = depression) 
 ```
 
 the plot function for the mcd method is very useful as it allows to compare the regression line with and without outliers (showing if there is a strong impact of outliers on the regression line):
 
 ```{r warning = FALSE, message = FALSE}
-plot_outliers_mcd(data.frame(anxiety,depression))
+plot_outliers_mcd(resMCD, x = data.frame(anxiety,depression))
 ```
 
