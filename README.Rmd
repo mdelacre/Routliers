@@ -46,13 +46,22 @@ Here is an example of detecting extreme level of anxiety and depression (based o
 
 ```{r warning = FALSE, message = FALSE}
 data(Attacks)
-anxiety <- rowMeans(Attacks[,c("hsc1","hsc2","hsc3","hsc4","hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")])
+anxiety <- rowMeans(
+  Attacks[,c("hsc1","hsc2","hsc3","hsc4",
+  "hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")]
+                    )
 res1 <- outliers_mad(x = anxiety)
 res1
 ```
 
 ```{r warning = FALSE, message = FALSE}
-depression <- rowMeans(Attacks[,c("hsc11","hsc12","hsc13","hsc14","hsc15","hsc16","hsc17","hsc18","hsc19","hsc20","hsc21","hsc22","hsc23","hsc24","hsc25")])
+depression <- rowMeans(
+  Attacks[,c("hsc11","hsc12","hsc13","hsc14",
+             "hsc15","hsc16","hsc17","hsc18",
+             "hsc19","hsc20","hsc21","hsc22",
+             "hsc23","hsc24","hsc25")]
+  )
+
 res2 <- outliers_mad(x = depression)
 res2
 ```

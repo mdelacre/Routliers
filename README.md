@@ -53,7 +53,10 @@ The MAD function is applied on the averaged scores.
 
 ``` r
 data(Attacks)
-anxiety <- rowMeans(Attacks[,c("hsc1","hsc2","hsc3","hsc4","hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")])
+anxiety <- rowMeans(
+  Attacks[,c("hsc1","hsc2","hsc3","hsc4",
+  "hsc5","hsc6","hsc7","hsc8","hsc9","hsc10")]
+                    )
 res1 <- outliers_mad(x = anxiety)
 res1
 #> Call:
@@ -74,7 +77,13 @@ res1
 ```
 
 ``` r
-depression <- rowMeans(Attacks[,c("hsc11","hsc12","hsc13","hsc14","hsc15","hsc16","hsc17","hsc18","hsc19","hsc20","hsc21","hsc22","hsc23","hsc24","hsc25")])
+depression <- rowMeans(
+  Attacks[,c("hsc11","hsc12","hsc13","hsc14",
+             "hsc15","hsc16","hsc17","hsc18",
+             "hsc19","hsc20","hsc21","hsc22",
+             "hsc23","hsc24","hsc25")]
+  )
+
 res2 <- outliers_mad(x = depression)
 res2
 #> Call:
@@ -108,7 +117,7 @@ resMCD
 #> 
 #> Number of detected outliers:
 #> total 
-#>   230
+#>   214
 ```
 
 It is also possible to plot the outliers, using plot\_outliers\_mad and
