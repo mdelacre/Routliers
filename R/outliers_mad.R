@@ -94,25 +94,26 @@ outliers_madEst <- function(x,
 
 outliers_mad.default <- function(x,b = 1.4826,threshold = 3,na.rm = TRUE){
 
-  x <- as.numeric(x)
-  b <- as.numeric(b)
-  threshold <- as.numeric(threshold)
-  na.rm <- as.logical(na.rm)
+    threshold <- as.numeric(threshold)
+    na.rm <- as.logical(na.rm)
 
-  out <- outliers_madEst(x,b,threshold,na.rm)
-  out$call <- match.call()
-  out$median <- out$Median
-  out$MAD <- out$MAD
-  out$limits <- as.vector(c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD))
-  out$nb <- c("extremely low" = length(out$L_outliers),
-              "extremely high" = length(out$U_outliers),
-              total = length(out$outliers))
+    out <- outliers_madEst(x,b,threshold,na.rm)
+    out$call <- match.call()
+    out$median <- out$Median
+    out$MAD <- out$MAD
+    out$limits <- as.vector(c(lower = out$LL_CI_MAD,upper = out$UL_CI_MAD))
+    out$nb <- c("extremely low" = length(out$L_outliers),
+                "extremely high" = length(out$U_outliers),
+                total = length(out$outliers))
 
-  class(out) <- "outliers_mad"
-  out
-  }
+    class(out) <- "outliers_mad"
+    out
+}
 
 print.outliers_mad <- function(x,...){
+
+  if(sum(is.na(x)) == 0){
+
   cat("Call:\n")
   print(x$call)
 
@@ -127,5 +128,8 @@ print.outliers_mad <- function(x,...){
 
   cat("\nNumber of detected outliers\n")
   print(x$nb)
+  } else {
+    print(paste("Analysis can not be performed due to missing values"))
+  }
 }
 
