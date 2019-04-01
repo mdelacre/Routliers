@@ -1,4 +1,4 @@
-context("test-outliers_mad")
+context("test-outliers_mahalanobis")
 
 data(Attacks)
 SOC <- rowMeans(Attacks[,c(
@@ -6,14 +6,12 @@ SOC <- rowMeans(Attacks[,c(
   "soc4","soc5","soc6",
   "soc7r","soc8","soc9",
   "soc10r","soc11","soc12","soc13")]
-  )
+)
+HSC <- rowMeans(Attacks[,22:46])
 
-res <- outliers_mad(x = SOC,na.rm=F)
+res <- outliers_mahalanobis(x = data.frame(SOC,HSC),na.rm=T)
 
 test_that("data types correct", {
-  expect_is(res,"outliers_mad")
+  expect_is(res,"outliers_mahalanobis")
 
 })
-
-
-
