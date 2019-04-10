@@ -62,8 +62,13 @@ outliers_mcdEst <- function(x,
 
   #Detecting outliers
   names_outliers <- which(dist > cutoff)
-  coordinates <- cbind(x_axis = data[,1][dist > cutoff],
-                      y_axis = data[,2][dist > cutoff])
+  coordinates <- data.frame(
+    matrix(NA, nrow = length(names_outliers), ncol = ncol(data))
+  )
+  for (k in seq_len(ncol(data))){
+    coordinates[,k] <- data[,k][dist > cutoff]
+  }
+
 
   # print results
   meth <- "Minimum Covariance Determinant estimator"

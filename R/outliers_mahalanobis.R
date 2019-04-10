@@ -19,8 +19,6 @@
 #' "soc8","soc9","soc10r","soc11","soc12","soc13")])
 #' HSC <- rowMeans(Attacks[,22:46])
 #' res <- outliers_mahalanobis(x = cbind(SOC,HSC), na.rm = TRUE)
-#' res
-#'
 #' # A list of elements can be extracted from the function,
 #' # such as the position of outliers in the dataset
 #' # and the coordinates of outliers
@@ -52,8 +50,12 @@ outliers_mahalanobisEst <- function(x,
   #Detecting outliers
   cutoff <- (qchisq(p = 1-alpha, df = ncol(data)))
   names_outliers <- which(dist > cutoff)
-  coordinates <- list(x_axis = data[,1][dist > cutoff],
-                      y_axis = data[,2][dist > cutoff])
+  coordinates <- data.frame(
+    matrix(NA, nrow = length(names_outliers), ncol = ncol(data))
+    )
+    for (k in seq_len(ncol(data))){
+  coordinates[,k] <- data[,k][dist > cutoff]
+    }
 
   # print results
   meth <- "Mahalanobis distance"
