@@ -1,5 +1,4 @@
-
-# Routliers
+﻿# Routliers
 
 Routliers is designed to help researchers to detect univariate and
 multivariate outliers, using robust methods: - The MAD method for

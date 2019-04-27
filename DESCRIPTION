@@ -1,24 +1,30 @@
 Package: Routliers
-Title: Robust outliers detection
-Version: 0.0.0.9000
-URL: https://github.com/mdelacre/Routliers
+Title: Robust Outliers Detection
+Version: 0.0.0.1
 Authors@R: c(
-    person("Marie", "Delacre", email = "marie.delacre@ulb.ac.be", role = "cre"),
-    person("Olivier", "Klein", email = "Klein.Olivier@ulb.ac.be", role = "aut"))
-Maintainer: Marie Delacre <marie.delacre@ulb.ac.be>
-Description: Detecting outliers using robust methods, i.e. the MAD for univariate outliers and MMCD for multivariate outliers.There is also the more known but less robust mahalanobis distance method, only for comparison purposes.
-Depends: R (>= 3.4.0)
-Imports:
-    MASS,
-    stats,
-    graphics
+    person(given = "Olivier",
+           family = "Klein",
+           role = c("aut"),
+           email = "Klein.Olivier@ulb.ac.be"),
+    person(given = "Marie",
+           family = "Delacre",
+           role = c("aut", "cre"),
+           email = "marie.delacre@ulb.ac.be"))
+Description: Detecting outliers using robust methods, 
+ 	i.e. the Median Absolute Deviation (MAD) for univariate outliers and the Mahalanobis-Minimum Covariance Determinant (MMCD)
+        for multivariate outliers.There is also the more known but less robust Mahalanobis 
+	distance method, only for comparison purposes.
 License: MIT + file LICENSE
-BugReports: https://github.com/mdelacre/Routliers/issues
-YEAR: 2018
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Depends: R (>= 2.10)
+BugReports: https://github.com/mdelacre/Routliers/issues
 Suggests: 
     knitr,
     rmarkdown,
     testthat
+Imports: 
+    MASS,
+    stats,
+    graphics
