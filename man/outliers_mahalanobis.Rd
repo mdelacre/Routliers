@@ -31,7 +31,6 @@ res <- outliers_mahalanobis(x = cbind(SOC,HSC), na.rm = TRUE)
 # and the coordinates of outliers
 res$outliers_pos
 res$outliers_val
-
 }
 \keyword{mahalanobis}
 \keyword{outliers}

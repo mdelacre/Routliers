@@ -24,7 +24,7 @@
 #' # and the coordinates of outliers
 #' res$outliers_pos
 #' res$outliers_val
-#'
+
 #' @importFrom stats mahalanobis cov na.omit qchisq
 
 # Create a generic function
@@ -65,7 +65,8 @@ outliers_mahalanobisEst <- function(x,
     list(MaxDist = cutoff,
          center = colMeans(data),
          outliers_pos = names_outliers,
-         outliers_val=coordinates)
+         outliers_val = coordinates,
+         dist_from_center = dist)
     )
 
 }

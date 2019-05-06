@@ -78,8 +78,10 @@ outliers_mcdEst <- function(x,
       list(MaxDist = cutoff,
            center = output$center,
            outliers_pos = names_outliers,
-           outliers_val=coordinates)
+           outliers_val=coordinates,
+           dist_from_center = dist)
       )
+
 
 }
 

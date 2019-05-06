@@ -40,8 +40,8 @@ res2 <- outliers_mcd(x = cbind(c1,c2),na.rm=TRUE)
 plot_outliers_mcd(res2, x=cbind(c1,c2),pos_display=TRUE)
 
 # When no outliers are detected, only one regression line is displayed
-c3 <- c(1,2,3,1,4,3,6,5)
-c4 <- c(1,2,3,1,3,4,6,5)
+c3 <- c(1,2,3,1,4,3,5,5)
+c4 <- c(1,2,3,1,5,3,5,5)
 res3 <- outliers_mcd(x = cbind(c3,c4),na.rm=TRUE)
 plot_outliers_mcd(res3,x=cbind(c3,c4),pos_display=TRUE)
 }
