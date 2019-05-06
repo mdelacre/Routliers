@@ -7,9 +7,9 @@
 \title{Routliers: Robust Outliers Detection}
 \description{
 Detecting outliers using robust methods, 
- 	i.e. the Median Absolute Deviation (MAD) for univariate outliers and the Mahalanobis-Minimum Covariance Determinant (MMCD)
-        for multivariate outliers.There is also the more known but less robust Mahalanobis 
-	distance method, only for comparison purposes.
+ 	i.e. the Median Absolute Deviation (MAD) for univariate outliers; see Leys, Ley, Klein, Bernard, & Licata (2013) <doi:10.1016/j.jesp.2013.03.013>
+        and the Mahalanobis-Minimum Covariance Determinant (MMCD) for multivariate outliers; see Leys, C., Klein, O., Dominicy, Y. & Ley, C. (2018) <doi:10.1016/j.jesp.2017.09.011>.
+        There is also the more known but less robust Mahalanobis distance method, only for comparison purposes.
 }
 \seealso{
 Useful links:
