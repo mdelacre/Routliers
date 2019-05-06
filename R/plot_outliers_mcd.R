@@ -30,8 +30,8 @@
 #' plot_outliers_mcd(res2, x=cbind(c1,c2),pos_display=TRUE)
 #'
 #' # When no outliers are detected, only one regression line is displayed
-#' c3 <- c(1,2,3,1,4,3,6,5)
-#' c4 <- c(1,2,3,1,3,4,6,5)
+#' c3 <- c(1,2,3,1,4,3,5,5)
+#' c4 <- c(1,2,3,1,5,3,5,5)
 #' res3 <- outliers_mcd(x = cbind(c3,c4),na.rm=TRUE)
 #' plot_outliers_mcd(res3,x=cbind(c3,c4),pos_display=TRUE)
 #' @importFrom stats mahalanobis lm na.omit qchisq
@@ -81,49 +81,9 @@ plot_outliers_mcd <- function(res,
            bty = "n",
            text.col = "darkviolet")
 
-  } else if (length(res$outliers_pos) == 1){
-    points(data[res$outliers_pos,][1],
-           data[res$outliers_pos,][2],
-           col = "red",
-           bg = "red",
-           pch = 15,
-           cex = .6)
-
-    if (pos_display==TRUE){
-      text(data[res$outliers_pos,][1],
-           data[res$outliers_pos,][2],
-           as.character(res$outliers_pos),
-           pos = 1,
-           cex = .75,
-           col = "red")}
-
-    if(lm(data[,2]~data[,1])$coefficients[2] > 0){
-      sign <- "+"
-    } else {sign <- ""}
-
-    if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
-      sign2 <- "+"
-    } else {sign2 <- ""}
-
-    par(xpd = TRUE)
-    legend(x = "top",
-           inset = -.25,
-           text.width = 0,
-           legend = c(
-             paste0("Regression line including all data: y = ",
-                    round(lm(data[,2]~data[,1])$coefficients[1],3),
-                    sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-             paste0("Regression line without detected outliers: y = ",
-                    round(mod$coefficients[1],3),sign2,
-                    round(mod$coefficients[2],3),"x")
-             ),
-           adj = c(.5,.5),
-           bty = "n",
-           text.col = c("darkviolet","darkgreen"))
-
-  } else if (length(res$outliers_pos) > 1){
-    points(data[res$outliers_pos,][,1],
-           data[res$outliers_pos,][,2],
+  } else if (length(res$outliers_pos) > 0){
+    points(res$outliers_val[,1],
+           res$outliers_val[,2],
            col = "red",
            bg = "red",
            pch = 15,
@@ -131,8 +91,8 @@ plot_outliers_mcd <- function(res,
 
     if (pos_display==TRUE){
       for (i in seq_len(length(res$outliers_pos))){
-        text(data[res$outliers_pos,][i,1],
-             data[res$outliers_pos,][i,2],
+        text(res$outliers_val[i,1],
+             res$outliers_val[i,2],
              as.character(res$outliers_pos[i]),
              pos = 1,
              cex = .75,

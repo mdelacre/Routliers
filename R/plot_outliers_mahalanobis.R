@@ -29,6 +29,7 @@
 #' c1 <- c(1,4,3,6,5,2,1,3,2,4,7,3,6,3,4,6)
 #' c2 <- c(1,3,4,6,5,7,1,4,3,7,50,8,8,15,10,6)
 #' res2 <- outliers_mahalanobis(x = cbind(c1,c2))
+
 #' plot_outliers_mahalanobis(res2, x = cbind(c1,c2),pos_display = TRUE)
 #'
 #' # When no outliers are detected, only one regression line is displayed
@@ -83,49 +84,9 @@ plot_outliers_mahalanobis <- function(res,
            bty = "n",
            text.col = "darkviolet")
 
-    } else if (length(res$outliers_pos) == 1){
-      points(data[res$outliers_pos,][1],
-             data[res$outliers_pos,][2],
-             col = "red",
-             bg = "red",
-             pch = 15,
-             cex = .6)
-
-      if (pos_display==TRUE){
-        text(data[res$outliers_pos,][1],
-             data[res$outliers_pos,][2],
-             as.character(res$outliers_pos),
-             pos = 1,
-             cex = .75,
-             col = "red")}
-
-      if(lm(data[,2]~data[,1])$coefficients[2] > 0){
-        sign <- "+"
-      } else {sign <- ""}
-
-      if(lm(dat2[,2]~dat2[,1])$coefficients[2] > 0){
-        sign2 <- "+"
-      } else {sign2 <- ""}
-
-      par(xpd=TRUE)
-      legend(x = "top",
-             inset = -.25,
-             text.width = 0,
-             legend = c(
-               paste0("Regression line including all data: y = ",
-                 round(lm(data[,2]~data[,1])$coefficients[1],3),
-                 sign,round(lm(data[,2]~data[,1])$coefficients[2],3),"x"),
-               paste0("Regression line without detected outliers: y = ",
-                 round(mod$coefficients[1],3),sign2,
-                 round(mod$coefficients[2],3),"x")
-               ),
-             adj = c(.5,.5),
-             bty = "n",
-             text.col = c("darkviolet","darkgreen"))
-
-    } else if (length(res$outliers_pos) > 1){
-      points(data[res$outliers_pos,][,1],
-             data[res$outliers_pos,][,2],
+    } else if (length(res$outliers_pos) > 0){
+            points(res$outliers_val[,1],
+             res$outliers_val[,2],
              col = "red",
              bg = "red",
              pch = 15,
@@ -133,8 +94,8 @@ plot_outliers_mahalanobis <- function(res,
 
       if (pos_display==TRUE){
         for (i in seq_len(length(res$outliers_pos))){
-          text(data[res$outliers_pos,][i,1],
-               data[res$outliers_pos,][i,2],
+          text(res$outliers_val[i,1],
+               res$outliers_val[i,2],
                as.character(res$outliers_pos[i]),
                pos = 1,
                cex = .75,
