@@ -29,7 +29,7 @@ data(Attacks)
 SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
 "soc7r","soc8","soc9","soc10r","soc11","soc12","soc13")])
 HSC <- rowMeans(Attacks[,22:46])
-res <- outliers_mcd(x = cbind(SOC,HSC),na.rm=TRUE)
+res <- outliers_mcd(x = cbind(SOC,HSC),na.rm=TRUE,h=.75)
 plot_outliers_mcd(res,x = cbind(SOC,HSC))
 
 # it's also possible to display the position of the multivariate outliers ion the graph

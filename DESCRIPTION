@@ -27,4 +27,5 @@ Suggests:
 Imports: 
     MASS,
     stats,
-    graphics
+    graphics,
+    ggplot2
