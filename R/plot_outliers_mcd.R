@@ -62,7 +62,11 @@ plot_outliers_mcd <- function(res,
   # basic plot
   p <- ggplot(data,aes(data[,1],data[,2])) +
     geom_point(aes(x=data[,1], y=data[,2], shape=values, color=values)) +
-    geom_smooth(aes(x=data[,1], y=data[,2]),method=lm,se=FALSE,colour="darkviolet") +
+    geom_smooth(aes(x=data[,1], y=data[,2]),
+                method=lm,
+                se=FALSE,
+                colour="darkviolet"
+                ) +
     theme(legend.position="none",
           legend.title = element_blank(),
           panel.background = element_rect(fill="white",
@@ -77,8 +81,14 @@ plot_outliers_mcd <- function(res,
 
   # if pos_display = TRUE, adding annotations in outliers points
   if (pos_display==TRUE){
-    display_decision <- annotate(geom="text", x=res$outliers_val[,1], y=res$outliers_val[,2], label=res$outliers_pos,
-                                 color="red",hjust="inward",vjust="inward")
+    display_decision <- annotate(geom="text",
+                                 x=res$outliers_val[,1],
+                                 y=res$outliers_val[,2],
+                                 label=res$outliers_pos,
+                                 color="red",
+                                 hjust="inward",
+                                 vjust="inward"
+                                 )
   } else {display_decision <- NULL}
 
   if (length(res$outliers_pos) == 0){ # if there are no outliers in the plot
@@ -88,13 +98,19 @@ plot_outliers_mcd <- function(res,
       sign <- "+"
     } else {sign <- ""}
     # labelling the regression line
-    label = paste0("Regression line: y = ",round(regr[1],3)," ",
+    label <- paste0("Regression line: y = ",round(regr[1],3)," ",
                    sign," ",round(regr[2],3),"x")
 
     # plotting results, with one regression line (including all data points)
     p +
-      scale_shape_manual(values=c(16,16),labels=c("standard values","standard values")) +
-      scale_color_manual(values=c('black','black'),labels=c("standard values","standard values"))+
+      scale_shape_manual(values=c(16,16),
+                         labels=c("standard values",
+                                  "standard values")
+                         ) +
+      scale_color_manual(values=c('black','black'),
+                         labels=c("standard values",
+                                  "standard values")
+                         )+
       ggtitle(label=label) +
       theme(plot.title = element_text(hjust = 0.5,color="darkviolet",size=12))
 
@@ -114,19 +130,27 @@ plot_outliers_mcd <- function(res,
       sign <- "+"
     } else {sign <- ""}
 
-    label1 = paste0("Regression line including all data: y = ",round(regr_all[1],3)," ",
-                    sign," ",round(regr_all[2],3),"x")
-    label2 = paste0("Regression line without detected outliers: y = ",round(mod[1],3)," ",
-                    sign," ",round(mod[2],3),"x")
+    label1 <- paste0("Regression line including all data: y = ",
+                     round(regr_all[1],3)," ",
+                     sign," ",
+                     round(regr_all[2],3),"x")
+    label2 <- paste0("Regression line without detected outliers: y = ",
+                     round(mod[1],3)," ",
+                     sign," ",
+                     round(mod[2],3),"x")
 
     p + geom_abline(slope=mod[2],
                     intercept=mod[1],
                     colour="darkgreen",size=.8) +
-      scale_shape_manual(values=c(16,15),labels=c("standard values","outliers")) +
-      scale_color_manual(values=c('black','red'),labels=c("standard values","outliers")) +
+      scale_shape_manual(values=c(16,15),
+                         labels=c("standard values",
+                                  "outliers")) +
+      scale_color_manual(values=c('black','red'),
+                         labels=c("standard values",
+                                  "outliers")) +
       ggtitle(label=label1,subtitle =label2) +
       theme(plot.title = element_text(hjust = 0.5,color="darkviolet",size=12),
-            plot.subtitle = element_text(hjust = 0.5,color="darkgreen",size=12),
+            plot.subtitle = element_text(hjust = 0.5,color="darkgreen",size=12)
       ) +
       display_decision
 

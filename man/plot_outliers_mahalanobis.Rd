@@ -40,9 +40,7 @@ plot_outliers_mahalanobis(res, x = cbind(SOC,HSC))
 c1 <- c(1,4,3,6,5,2,1,3,2,4,7,3,6,3,4,6)
 c2 <- c(1,3,4,6,5,7,1,4,3,7,50,8,8,15,10,6)
 res2 <- outliers_mahalanobis(x = cbind(c1,c2))
-res3 <- outliers_mcd(x=cbind(c1,c2))
 plot_outliers_mahalanobis(res2, x = cbind(c1,c2),pos_display = TRUE)
-plot_outliers_mcd(res3,x=cbind(c1,c2),pos_display=TRUE)
 
 # When no outliers are detected, only one regression line is displayed
 c3 <- c(1,4,3,6,5)
