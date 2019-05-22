@@ -93,13 +93,14 @@ plot_outliers_mahalanobis <- function(res,
 
      if (length(res$outliers_pos) == 0){ # if there are no outliers in the plot
 
-      regr <- lm(data[,2]~data[,1])$coefficients
-      if(regr[2] > 0){
-        sign <- "+"
-      } else {sign <- ""}
-      # labelling the regression line
-      label <- paste0("Regression line: y = ",round(regr[1],3)," ",
-                      sign," ",round(regr[2],3),"x")
+       names(data)[ncol(data)]="DV"
+       regr <- lm(DV~.,data=data)$coefficients
+       # Translate regr into a regression line
+       regr_line <- paste("Regression line: y = ",round(regr[1],3))
+       for (k in seq_len(length(regr)-1)){
+         if (regr[k+1] > 0){regr_line <- paste0(regr_line," + ",abs(round(regr[k+1],3))," ",names(regr)[k+1])
+         } else {regr_line <- paste0(regr_line," - ",abs(round(regr[k+1],3))," ",names(regr)[k+1])}
+       }
 
       # plotting results, with one regression line (including all data points)
       p +
@@ -113,38 +114,31 @@ plot_outliers_mahalanobis <- function(res,
         labels=c("standard values",
                  "standard values")
         )+
-      ggtitle(label=label) +
+      ggtitle(label=regr_line) +
       theme(plot.title = element_text(hjust = 0.5,color="darkviolet",size=12))
 
     } else { # if there are detected outliers
-        # matrix without outliers (IF there are outliers):
-        dat2 <- data[-res$outliers_pos,]
-        # regression line computed with and without outliers:
-        regr_all <- lm(data[,2]~data[,1])$coefficients
-        mod <- lm(dat2[,2]~dat2[,1])$coefficients
 
-        # labelling the regression lines (with and without outliers)
-        if(regr_all[2] > 0){
-          sign <- "+"
-        } else {sign <- ""}
+      # regression line including all data:
+      names(data)[ncol(data)]="DV"
+      regr <- lm(DV~.,data=data)$coefficients
+      regr_line <- paste("Regression line including all data: y = ",round(regr[1],3))
+      for (k in seq_len(length(regr)-1)){
+        if (regr[k+1] > 0){regr_line <- paste0(regr_line," + ",abs(round(regr[k+1],3))," ",names(regr)[k+1])
+        } else {regr_line <- paste0(regr_line," - ",abs(round(regr[k+1],3))," ",names(regr)[k+1])}
+      }
+      # regression without outliers:
+      dat2 <- data[-res$outliers_pos,]
+      names(dat2)[ncol(dat2)]="DV"
+      regr_no <- lm(DV~.,data=dat2)$coefficients
+      regr_line_no <- paste("Regression line without detected outliers: y = ",round(regr_no[1],3))
+      for (k in seq_len(length(regr_no)-1)){
+        if (regr_no[k+1] > 0){regr_line_no <- paste0(regr_line_no," + ",abs(round(regr_no[k+1],3))," ",names(regr_no)[k+1])
+        } else {regr_line_no <- paste0(regr_line_no," - ",abs(round(regr_no[k+1],3))," ",names(regr_no)[k+1])}
+      }
 
-        if(mod[2] > 0){
-          sign <- "+"
-        } else {sign <- ""}
-
-        label1 <- paste0(
-          "Regression line including all data: y = ",
-                         round(regr_all[1],3)," ",
-                         sign," ",round(regr_all[2],3),"x"
-          )
-        label2 <- paste0(
-          "Regression line without detected outliers: y = ",
-                         round(mod[1],3)," ",
-                         sign," ",round(mod[2],3),"x"
-          )
-
-        p + geom_abline(slope=mod[2],
-                        intercept=mod[1],
+      p + geom_abline(slope=regr_no[2],
+                        intercept=regr_no[1],
                         colour="darkgreen",size=.8) +
           scale_shape_manual(values=c(16,15),
                              labels=c("standard values",
@@ -152,7 +146,7 @@ plot_outliers_mahalanobis <- function(res,
           scale_color_manual(values=c('black','red'),
                              labels=c("standard values",
                                       "outliers")) +
-          ggtitle(label=label1,subtitle =label2) +
+          ggtitle(label=regr_line,subtitle =regr_line_no) +
           theme(plot.title = element_text(hjust = 0.5,
                                           color="darkviolet",
                                           size=12),
