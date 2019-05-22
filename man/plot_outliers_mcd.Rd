@@ -9,7 +9,7 @@ plot_outliers_mcd(res, x, pos_display = FALSE)
 \arguments{
 \item{res}{result of the outliers_mad function from which we want to create a plot}
 
-\item{x}{matrix of bivariate values from which we want to compute outliers}
+\item{x}{matrix of multivariate values from which we want to compute outliers. Last column of the matrix is considered as the DV in the regression line.}
 
 \item{pos_display}{set whether the position of outliers in the dataset should be displayed on the graph (pos_display = TRUE)
 or not (pos_display = FALSE)}

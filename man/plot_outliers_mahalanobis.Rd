@@ -9,7 +9,7 @@ plot_outliers_mahalanobis(res, x, pos_display = FALSE)
 \arguments{
 \item{res}{result of the outliers_mad function from which we want to create a plot}
 
-\item{x}{matrix of bivariate values from which we want to compute outliers}
+\item{x}{matrix of multivariate values from which we want to compute outliers. Last column of the matrix is considered as the DV in the regression line.}
 
 \item{pos_display}{set whether the position of outliers in the dataset should be displayed on the graph (pos_display = TRUE)
 or not (pos_display = FALSE)}
@@ -34,7 +34,6 @@ SOC <- rowMeans(Attacks[,c("soc1r","soc2r","soc3r","soc4","soc5","soc6",
 HSC <- rowMeans(Attacks[,22:46])
 res <- outliers_mahalanobis(x = cbind(SOC,HSC))
 plot_outliers_mahalanobis(res, x = cbind(SOC,HSC))
-
 # it's also possible to display the position of the multivariate outliers ion the graph
 # preferably, when the number of multivariate outliers is not too high
 c1 <- c(1,4,3,6,5,2,1,3,2,4,7,3,6,3,4,6)

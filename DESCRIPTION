@@ -1,6 +1,6 @@
 Package: Routliers
 Title: Robust Outliers Detection
-Version: 0.0.0.1
+Version: 0.0.0.3
 Authors@R: c(
     person(given = "Olivier",
            family = "Klein",
