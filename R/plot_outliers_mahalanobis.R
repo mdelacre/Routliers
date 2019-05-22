@@ -78,7 +78,7 @@ plot_outliers_mahalanobis <- function(res,
                    ) +
     geom_hline(yintercept=res$center[2], linetype=2, color="lightgrey") +
     geom_vline(xintercept=res$center[1], linetype=2, color="lightgrey") +
-    xlab("Dimension 1") + ylab("Dimension 2")
+    xlab(colnames(data)[1]) + ylab(colnames(data)[ncol(data)])
 
     # if pos_display = TRUE, adding annotations in outliers points
     if (pos_display==TRUE){
@@ -93,10 +93,12 @@ plot_outliers_mahalanobis <- function(res,
 
      if (length(res$outliers_pos) == 0){ # if there are no outliers in the plot
 
+       DV <- names(data)[ncol(data)]
        names(data)[ncol(data)]="DV"
        regr <- lm(DV~.,data=data)$coefficients
        # Translate regr into a regression line
-       regr_line <- paste("Regression line: y = ",round(regr[1],3))
+       regr_line <- paste("Regression line:", DV," = ",round(regr[1],3))
+
        for (k in seq_len(length(regr)-1)){
          if (regr[k+1] > 0){regr_line <- paste0(regr_line," + ",abs(round(regr[k+1],3))," ",names(regr)[k+1])
          } else {regr_line <- paste0(regr_line," - ",abs(round(regr[k+1],3))," ",names(regr)[k+1])}
@@ -120,9 +122,10 @@ plot_outliers_mahalanobis <- function(res,
     } else { # if there are detected outliers
 
       # regression line including all data:
+      DV <- names(data)[ncol(data)]
       names(data)[ncol(data)]="DV"
       regr <- lm(DV~.,data=data)$coefficients
-      regr_line <- paste("Regression line including all data: y = ",round(regr[1],3))
+      regr_line <- paste("Regression line including all data:",DV," = ",round(regr[1],3))
       for (k in seq_len(length(regr)-1)){
         if (regr[k+1] > 0){regr_line <- paste0(regr_line," + ",abs(round(regr[k+1],3))," ",names(regr)[k+1])
         } else {regr_line <- paste0(regr_line," - ",abs(round(regr[k+1],3))," ",names(regr)[k+1])}
@@ -131,7 +134,7 @@ plot_outliers_mahalanobis <- function(res,
       dat2 <- data[-res$outliers_pos,]
       names(dat2)[ncol(dat2)]="DV"
       regr_no <- lm(DV~.,data=dat2)$coefficients
-      regr_line_no <- paste("Regression line without detected outliers: y = ",round(regr_no[1],3))
+      regr_line_no <- paste("Regression line without detected outliers:",DV," = ",round(regr_no[1],3))
       for (k in seq_len(length(regr_no)-1)){
         if (regr_no[k+1] > 0){regr_line_no <- paste0(regr_line_no," + ",abs(round(regr_no[k+1],3))," ",names(regr_no)[k+1])
         } else {regr_line_no <- paste0(regr_line_no," - ",abs(round(regr_no[k+1],3))," ",names(regr_no)[k+1])}
