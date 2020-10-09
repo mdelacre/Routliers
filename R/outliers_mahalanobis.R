@@ -2,7 +2,7 @@
 #'
 #' Detecting multivariate outliers using the Mahalanobis distance
 #'
-#' @param x matrix of bivariate values from which we want to compute outliers
+#' @param x matrix of multivariate values from which we want to compute outliers
 #' @param alpha nominal type I error probability (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
 #'

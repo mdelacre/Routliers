@@ -2,7 +2,7 @@
 #'
 #' Detecting multivariate outliers using the Minimum Covariance Determinant approach
 #'
-#' @param x matrix of bivariate values from which we want to compute outliers
+#' @param x matrix of multivariate values from which we want to compute outliers
 #' @param h proportion of dataset to use in order to compute sample means and covariances
 #' @param alpha nominal type I error probability (by default .01)
 #' @param na.rm set whether Missing Values should be excluded (na.rm = TRUE) or not (na.rm = FALSE) - defaults to TRUE
@@ -86,7 +86,6 @@ outliers_mcdEst <- function(x,
 }
 
 # Adding a default method in defining a function called outliers_mcd.default
-
 outliers_mcd.default <- function(x,h = .5,alpha = .01,na.rm = TRUE){
   out <- outliers_mcdEst(x,h,alpha,na.rm)
   out$distance <- out$MaxDist
@@ -109,4 +108,5 @@ print.outliers_mcd <- function(x,...){
   print(x$nb)
 
 }
+
 
