@@ -32,7 +32,7 @@ plot_outliers_mad <- function(res,x,pos_display=FALSE){
   # plotting results
   par(mar = c(5.1,3.1,5.1,1.1))
 
-  if(inherits(x,c("numeric","integer")) == FALSE)
+  if(!inherits(x, c("numeric","integer")))
     stop("x is neither numeric nor integer")
 
   data <- na.omit(x)   # incomplete cases are removed
@@ -93,7 +93,8 @@ plot_outliers_mad <- function(res,x,pos_display=FALSE){
   if(length(data[res$outliers_pos]) == 0){comment <- "No outliers are detected"
   } else {comment <- paste(length(res$outliers),"outliers are detected")}
 
-  legend("top",comment,pch = 1,col = "white",cex = 1,bty = "n")
+  # Affiche le commentaire en dessous du graphique (dans la marge inférieure)
+  mtext(comment, side = 1, line = 4, at = mean(par("usr")[1:2]), cex = 1, col = "black")
 
 }
 
